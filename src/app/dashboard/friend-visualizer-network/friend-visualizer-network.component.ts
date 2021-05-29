@@ -15,23 +15,21 @@ import * as d3 from 'd3';
 })
 export class FriendVisualizerNetworkComponent {
   @Input() tabUpdate: number = 0;
-  private people: Person[] = [];
-  data: NetworkGraph = {
-  "nodes": [],
-  "links": [],
-}
+  private data: NetworkGraph = {
+    "nodes": [],
+    "links": [],
+  }
 
   // TODO(michaelsimpson): find a better way to typecast this.svg
   /* eslint-disable  @typescript-eslint/no-explicit-any */
   private svg:any;
-  // set the dimensions and margins of the graph
-  margin = {top: 10, right: 30, bottom: 30, left: 40};
-  width = 400 - this.margin.left - this.margin.right;
-  height = 400 - this.margin.top - this.margin.bottom;
+  private margin = {top: 10, right: 30, bottom: 30, left: 40};
+  private width = 600 - this.margin.left - this.margin.right;
+  private height = 400 - this.margin.top - this.margin.bottom;
 
   constructor(private store: Store<{ people: Person[] }>) { }
 
-  updateData(peopleData:Person[]){
+  setData(peopleData:Person[]){
     const nodes: Node[] = [];
     const links: LinkData[] = [];
     for(let person of peopleData){
@@ -62,8 +60,7 @@ export class FriendVisualizerNetworkComponent {
   ngOnChanges() {
     const people$ = this.store.select('people');
     people$.pipe(take(1)).subscribe((res)=>{
-      this.people=res;
-      this.updateData(res);
+      this.setData(res);
       this.createSvg();
       this.drawNetwork(this.data);
     });
@@ -84,7 +81,6 @@ export class FriendVisualizerNetworkComponent {
   // TODO(michaelsimpson): find a better way to typecast data
   /* eslint-disable  @typescript-eslint/no-explicit-any */
   private drawNetwork(data:any){{
-    // Initialize the links
     var link = this.svg
     .selectAll("line")
     .data(data.links)
@@ -92,7 +88,6 @@ export class FriendVisualizerNetworkComponent {
     .append("line")
     .style("stroke", "#aaa")
 
-    // Initialize the nodes
     var node = this.svg
     .selectAll("circle")
     .data(data.nodes)
@@ -102,14 +97,13 @@ export class FriendVisualizerNetworkComponent {
     .style("fill", "#69b3a2")
 
     // TODO(michaelsimpson): find a way to add lables...
-    var lables = node.append("text")
-    .text(function(d:Node) {
-      return d.id;
-    })
-    .attr('x', 6)
-    .attr('y', 3);
+    // var lables = node.append("text")
+    // .text(function(d:Node) {
+    //   return d.id;
+    // })
+    // .attr('x', 6)
+    // .attr('y', 3);
 
-    // Let's list the force we wanna apply on the network
     var simulation = d3.forceSimulation(data.nodes)
     .force("link", d3.forceLink()
     // TODO(michaelsimpson): find a better way to typecast node datum
@@ -121,7 +115,6 @@ export class FriendVisualizerNetworkComponent {
     .force("center", d3.forceCenter(this.width / 2, this.height / 2))
     .on("end", ticked);
 
-    // This function is run at each iteration of the force algorithm, updating the nodes position.
     function ticked() {
     link
     .attr("x1", function(d:Link) { return d.source.x; })

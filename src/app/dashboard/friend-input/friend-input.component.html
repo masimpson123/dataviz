@@ -2,7 +2,7 @@
 <form [formGroup]="personForm">
   <mat-form-field >
     <mat-label>Name:</mat-label>
-    <input type="text" matInput placeholder="Name" formControlName="name">
+    <input type="text" matInput placeholder="Name" formControlName="name" required>
   </mat-form-field>
   <div formArrayName="friends">
     <mat-form-field
@@ -10,15 +10,15 @@
       <mat-label>Friend {{i+1}}:</mat-label>
       <input matInput placeholder="Friend" [formControlName]="i">
     </mat-form-field>
+    <button mat-raised-button (click)="addFriend()">Add Friend +</button>
   </div>
-  <button (click)="addFriend()">Add Friend +</button>
   <mat-form-field>
     <mat-label>Age:</mat-label>
-    <input matInput placeholder="Age" formControlName="age">
+    <input matInput placeholder="Age" formControlName="age" required>
   </mat-form-field>
   <mat-form-field>
     <mat-label>Weight:</mat-label>
-    <input matInput placeholder="Weight" formControlName="weight">
+    <input matInput placeholder="Weight" formControlName="weight" required>
   </mat-form-field>
   <button [disabled]="!personForm.valid" mat-raised-button color="primary" (click)="addPerson()">Add Person</button>
   <br>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { addPerson } from '../../store/friend-logger.actions';
@@ -10,9 +10,10 @@ import { FormGroup, FormControl, FormBuilder, FormArray, Validators } from '@ang
   templateUrl: './friend-input.component.html',
   styleUrls: ['./friend-input.component.css']
 })
-export class FriendInputComponent implements OnInit {
+export class FriendInputComponent {
   people$: Observable<Person[]>;
   people: Person[] = [];
+  // TODO(michaelsimpson): properly validate this data
   personForm = new FormGroup({
     name: new FormControl(''),
     friends: this.fb.array([
@@ -31,20 +32,25 @@ export class FriendInputComponent implements OnInit {
   }
 
   constructor(private store: Store<{ people: Person[] }>,private fb: FormBuilder) {
+    // TODO(michaelsimpson): can this be replaced with an async pipe
+    // in the template?
     this.people$ = store.select('people');
-    this.people$.subscribe((res)=>{this.people=res;});
-  }
-
-  ngOnInit() {
-    console.log("initialization");
+    this.people$.subscribe((res)=>{
+      this.people=res;
+    });
   }
 
   addPerson() {
-    const person = new Person(this.personForm.controls.name.value,
-      this.personForm.controls.friends.value,
-      this.personForm.controls.age.value,
-      this.personForm.controls.weight.value);
+    const name = this.personForm.controls.name.value;
+    const friends = this.personForm.controls.friends.value;
+    const age = this.personForm.controls.age.value;
+    const weight = this.personForm.controls.weight.value;
+    const person = new Person(name, friends, age, weight);
     this.store.dispatch(addPerson({person:person}));
+    this.resetForm();
+  }
+
+  resetForm() {
     this.personForm.reset();
     this.friends.clear();
     this.addFriend();
