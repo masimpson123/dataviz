@@ -1,0 +1,37 @@
+
+<form [formGroup]="personForm">
+  <mat-form-field >
+    <mat-label>Name:</mat-label>
+    <input type="text" matInput placeholder="Name" formControlName="name">
+  </mat-form-field>
+  <div formArrayName="friends">
+    <mat-form-field
+      *ngFor="let friend of friends.controls; let i=index">
+      <mat-label>Friend {{i+1}}:</mat-label>
+      <input matInput placeholder="Friend" [formControlName]="i">
+    </mat-form-field>
+  </div>
+  <button (click)="addFriend()">Add Friend +</button>
+  <mat-form-field>
+    <mat-label>Age:</mat-label>
+    <input matInput placeholder="Age" formControlName="age">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Weight:</mat-label>
+    <input matInput placeholder="Weight" formControlName="weight">
+  </mat-form-field>
+  <button [disabled]="!personForm.valid" mat-raised-button color="primary" (click)="addPerson()">Add Person</button>
+  <br>
+  <br>
+  <button (click)="addMockData()" mat-raised-button color="accent">Add Mock Data</button>
+  <br>
+  <br>
+  <mat-card *ngIf="people.length">
+  <mat-list dense>
+    <div mat-subheader>PEOPLE</div>
+    <mat-list-item *ngFor="let person of people">
+      <div mat-line>{{person.name}}</div>
+    </mat-list-item>
+  </mat-list>
+  </mat-card>
+</form>
