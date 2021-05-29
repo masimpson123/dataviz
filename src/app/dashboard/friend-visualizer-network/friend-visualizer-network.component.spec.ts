@@ -49,6 +49,7 @@ describe('FriendVisualizerNetworkComponent', () => {
     expect(nodes.length === 9).toBe(true);
   });
 
+  // TODO(michaelsimpson): pull this out into a test utility
   function populateStore(){
     const person0 = new Person('Theodore',['Henry', 'Brianna', 'Lindsey'],15,160);
     const person1 = new Person('Henry',['Hanzel','Thomas','Charles','Theodore','Brianna'],40,170);
