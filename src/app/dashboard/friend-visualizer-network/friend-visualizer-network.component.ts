@@ -27,7 +27,7 @@ export class FriendVisualizerNetworkComponent {
   private width = 600 - this.margin.left - this.margin.right;
   private height = 400 - this.margin.top - this.margin.bottom;
 
-  constructor(private store: Store<{ people: Person[] }>) { }
+  constructor(public store: Store<{ people: Person[] }>) { }
 
   setData(peopleData:Person[]){
     const nodes: Node[] = [];
@@ -59,7 +59,7 @@ export class FriendVisualizerNetworkComponent {
 
   ngOnChanges() {
     const people$ = this.store.select('people');
-    people$.pipe(take(1)).subscribe((res)=>{
+    people$.pipe(take(1)).subscribe((res: Person[])=>{
       this.setData(res);
       this.createSvg();
       this.drawNetwork(this.data);
@@ -126,7 +126,6 @@ export class FriendVisualizerNetworkComponent {
     .attr("cx", function (d:Coordinates) { return d.x+6; })
     .attr("cy", function(d:Coordinates) { return d.y-6; });
     }
-
     };
   }
 }

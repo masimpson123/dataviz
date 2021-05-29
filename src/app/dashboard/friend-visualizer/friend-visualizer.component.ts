@@ -22,9 +22,11 @@ export class FriendVisualizerComponent {
   private width = 500 - (this.margin * 2);
   private height = 300 - (this.margin * 2);
 
-  constructor(private store: Store<{ people: Person[] }>) {
+  constructor(public store: Store<{ people: Person[] }>) {
     this.people$ = store.select('people');
-    this.people$.subscribe((res)=>{this.people=res;});
+    this.people$.subscribe((res)=>{
+      this.people=res;
+    });
   }
 
   ngOnChanges() {

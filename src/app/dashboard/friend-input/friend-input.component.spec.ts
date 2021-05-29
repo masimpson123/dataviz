@@ -1,14 +1,34 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { Person } from '../../models/Person';
 import { FriendInputComponent } from './friend-input.component';
+import { friendLoggerReducer } from '../../store/friend-logger.reducer';
+import { StoreModule } from '@ngrx/store';
+import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-fdescribe('FriendInputComponent', () => {
+describe('FriendInputComponent', () => {
   let component: FriendInputComponent;
   let fixture: ComponentFixture<FriendInputComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FriendInputComponent ]
+      imports: [
+        StoreModule.forRoot({ people: friendLoggerReducer }),
+        ReactiveFormsModule,
+        MatInputModule,
+        MatButtonModule,
+        MatTabsModule,
+        MatListModule,
+        MatCardModule,
+        NoopAnimationsModule,
+      ],
+      declarations: [ FriendInputComponent ],
     })
     .compileComponents();
   });
@@ -27,40 +47,38 @@ fdescribe('FriendInputComponent', () => {
     const form = component.personForm;
     expect(form.valid).toBeFalsy();
 
-    const nameInput = form.controls.name;
+    let nameInput = form.controls.name;
     nameInput.setValue('Tony');
-    const nameFriends = form.controls.friends;
-    nameInput.setValue('Natasha');
-    const nameInput = form.controls.age;
-    nameInput.setValue('32');
-    const nameInput = form.controls.weight;
-    nameInput.setValue('180');
+    let friendsInput = form.controls.friends;
+    friendsInput.setValue(['Natasha']);
+    let ageInput = form.controls.age;
+    ageInput.setValue('32');
+    let weightInput = form.controls.weight;
+    weightInput.setValue('180');
 
     component.addPerson();
 
-    const nameInput = form.controls.name;
+    nameInput = form.controls.name;
     nameInput.setValue('Natasha');
-    const nameFriends = form.controls.friends;
-    nameInput.setValue('Carly');
-    const nameInput = form.controls.age;
-    nameInput.setValue('29');
-    const nameInput = form.controls.weight;
-    nameInput.setValue('120');
+    friendsInput = form.controls.friends;
+    friendsInput.setValue(['Carly']);
+    ageInput = form.controls.age;
+    ageInput.setValue('29');
+    weightInput = form.controls.weight;
+    weightInput.setValue('120');
 
     component.addPerson();
 
-    const people = [];
-    const names = [];
+    const names: string[] = [];
 
-    const people$ = store.select('people');
-    people$.subscribe((res)=>{
-      for(let person of res){
-        names.push(person.name);
-      }
-    });
+    for(let person of component.people){
+      names.push(person.name);
+    }
 
-    expect(people.length === 2).toBe(true);
-    expect(names.includes('Michael')).toBe(true);
-    expect(names.includes('Brianna')).toBe(true);
+    // TODO(michaelsimpson): write expects that confirm friend, age and weight
+    // are stored and fetched as expected.
+    expect(component.people.length === 2).toBe(true);
+    expect(names.includes('Tony')).toBe(true);
+    expect(names.includes('Natasha')).toBe(true);
   });
 });

@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { addPerson } from '../../store/friend-logger.actions';
 import { Person } from '../../models/Person';
-import { FormGroup, FormControl, FormBuilder, FormArray, Validators } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-friend-input',
