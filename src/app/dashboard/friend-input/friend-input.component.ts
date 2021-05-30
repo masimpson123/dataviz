@@ -51,13 +51,9 @@ export class FriendInputComponent {
   }
 
   formInvalid(){
-    if (!this.personForm.controls.name.value ||
+    return !this.personForm.controls.name.value ||
       !this.personForm.controls.age.value ||
-      !this.personForm.controls.weight.value) {
-        return true;
-      } else {
-        return false;
-      }
+      !this.personForm.controls.weight.value
   }
 
   resetForm() {
