@@ -36,6 +36,7 @@ describe('FriendVisualizerComponent', () => {
     // https://angular.io/guide/testing-components-scenarios#component-inside-a-test-host
     component.ngOnChanges();
     const bars = document.querySelectorAll("svg rect");
+    // expect one bar for each of the 9 people
     expect(bars.length === 9).toBe(true);
   });
 

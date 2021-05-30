@@ -45,7 +45,6 @@ describe('FriendInputComponent', () => {
 
   it('adds people to the store', () => {
     const form = component.personForm;
-    expect(form.valid).toBeFalsy();
 
     let nameInput = form.controls.name;
     nameInput.setValue('Tony');
