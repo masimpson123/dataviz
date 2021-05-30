@@ -50,6 +50,16 @@ export class FriendInputComponent {
     this.resetForm();
   }
 
+  formInvalid(){
+    if (!this.personForm.controls.name.value ||
+      !this.personForm.controls.age.value ||
+      !this.personForm.controls.weight.value) {
+        return true;
+      } else {
+        return false;
+      }
+  }
+
   resetForm() {
     this.personForm.reset();
     this.friends.clear();
