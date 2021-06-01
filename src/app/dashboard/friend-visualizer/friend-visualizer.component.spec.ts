@@ -29,7 +29,7 @@ describe('FriendVisualizerComponent', () => {
 
   // TODO(michaelsimpson): look into jasmine screendiff options.
   // https://hughmccamphill.com/blog/wdio-image-comparison/
-  it('should render as expected', async () => {
+  it('should render as expected', () => {
     component.store.dispatch(reset());
     // await sleep(1500);
     populateStore();
