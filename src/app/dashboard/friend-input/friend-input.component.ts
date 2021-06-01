@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { addPerson } from '../../store/friend-logger.actions';
+import { addPerson, reset } from '../../store/friend-logger.actions';
 import { Person } from '../../models/Person';
 import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
 
@@ -96,5 +96,9 @@ export class FriendInputComponent {
     this.store.dispatch(addPerson({person:person6}));
     this.store.dispatch(addPerson({person:person7}));
     this.store.dispatch(addPerson({person:person8}));
+  }
+
+  resetStore(){
+    this.store.dispatch(reset());
   }
 }

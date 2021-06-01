@@ -44,6 +44,7 @@ describe('FriendInputComponent', () => {
   });
 
   it('adds people to the store', () => {
+    component.resetStore();
     const form = component.personForm;
 
     let nameInput = form.controls.name;
@@ -70,13 +71,12 @@ describe('FriendInputComponent', () => {
 
     const names: string[] = [];
 
-    for(let person of component.people){
-      names.push(person.name);
-    }
+    component.people.forEach((value: Person,key:string) => {
+      names.push(value.name);
+    });
 
     // TODO(michaelsimpson): write expects that confirm friend, age and weight
-    // are stored and fetched as expected.
-    expect(component.people.length === 2).toBe(true);
+    // are stored and fetched as expected
     expect(names.includes('Tony')).toBe(true);
     expect(names.includes('Natasha')).toBe(true);
   });
