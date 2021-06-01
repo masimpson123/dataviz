@@ -41,8 +41,12 @@ export class FriendInputComponent {
   }
 
   addPerson() {
-    // TODO(michaelsimpson): check if name is already used before adding it or tabUpdate
-    // visualizer component so that it can accomodate duplicate display names
+    for(let person of this.people){
+      if (person.name === this.personForm.controls.name.value) {
+        alert("Duplicate entries not permitted!");
+        return;
+      }
+    }
     const name = this.personForm.controls.name.value;
     const friends = this.personForm.controls.friends.value;
     const age = this.personForm.controls.age.value;
