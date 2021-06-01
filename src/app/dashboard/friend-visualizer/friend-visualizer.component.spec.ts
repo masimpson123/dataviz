@@ -29,8 +29,9 @@ describe('FriendVisualizerComponent', () => {
 
   // TODO(michaelsimpson): look into jasmine screendiff options.
   // https://hughmccamphill.com/blog/wdio-image-comparison/
-  it('should render as expected', () => {
+  it('should render as expected', async () => {
     component.store.dispatch(reset());
+    await sleep(1000);
     populateStore();
     // TODO(michaelsimpson): wrap this component in a test host for more realistic
     // binding and change detection.
@@ -61,5 +62,9 @@ describe('FriendVisualizerComponent', () => {
     component.store.dispatch(addPerson({person:person6}));
     component.store.dispatch(addPerson({person:person7}));
     component.store.dispatch(addPerson({person:person8}));
+  }
+
+  function sleep(ms:number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 });

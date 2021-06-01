@@ -50,7 +50,7 @@ describe('FriendInputComponent', () => {
     let nameInput = form.controls.name;
     nameInput.setValue('Tony');
     let friendsInput = form.controls.friends;
-    friendsInput.setValue(['Natasha']);
+    friendsInput.setValue(['Jonathan']);
     let ageInput = form.controls.age;
     ageInput.setValue('32');
     let weightInput = form.controls.weight;
@@ -59,7 +59,7 @@ describe('FriendInputComponent', () => {
     component.addPerson();
 
     nameInput = form.controls.name;
-    nameInput.setValue('Natasha');
+    nameInput.setValue('Mathew');
     friendsInput = form.controls.friends;
     friendsInput.setValue(['Carly']);
     ageInput = form.controls.age;

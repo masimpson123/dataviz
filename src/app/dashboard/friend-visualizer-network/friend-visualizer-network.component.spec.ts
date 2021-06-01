@@ -18,7 +18,7 @@ describe('FriendVisualizerNetworkComponent', () => {
   });
 
   beforeEach(() => {
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 11000;
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 12000;
     fixture = TestBed.createComponent(FriendVisualizerNetworkComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -36,6 +36,7 @@ describe('FriendVisualizerNetworkComponent', () => {
   // https://hughmccamphill.com/blog/wdio-image-comparison/
   it('should render as expected', async () => {
     component.store.dispatch(reset());
+    await sleep(1000);
     populateStore();
     // TODO(michaelsimpson): wrap this component in a test host for more realistic
     // binding and change detection.
@@ -45,11 +46,6 @@ describe('FriendVisualizerNetworkComponent', () => {
     const links = document.querySelectorAll("svg line");
     const nodes = document.querySelectorAll("svg circle");
     // expect two lines for each of the nine node connections
-console.log(links.length);
-console.log(links.length);
-console.log(links.length);
-console.log(links.length);
-console.log(links.length);
     expect(links.length === 18).toBe(true);
     // expect 9 nodes
     expect(nodes.length === 9).toBe(true);
