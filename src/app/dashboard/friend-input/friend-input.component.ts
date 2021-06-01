@@ -41,11 +41,13 @@ export class FriendInputComponent {
   }
 
   addPerson() {
+    // TODO(michaelsimpson): check if name is already used before adding it or tabUpdate
+    // visualizer component so that it can accomodate duplicate display names
     const name = this.personForm.controls.name.value;
     const friends = this.personForm.controls.friends.value;
     const age = this.personForm.controls.age.value;
     const weight = this.personForm.controls.weight.value;
-    const person = new Person(name, friends, age, weight);
+    const person = new Person(name, friends, age, weight, (Math.random() * 10000));
     this.store.dispatch(addPerson({person:person}));
     this.resetForm();
   }
@@ -63,15 +65,15 @@ export class FriendInputComponent {
   }
 
   addMockData() {
-    const person0 = new Person('Theodore',['Henry', 'Brianna', 'Lindsey'],15,160);
-    const person1 = new Person('Henry',['Hanzel','Thomas','Charles','Theodore','Brianna'],40,170);
-    const person2 = new Person('Brianna',['Theodore', 'Henry','Natasha', 'Seymore'],29,120);
-    const person3 = new Person('Natasha',['Brianna'],35,135);
-    const person4 = new Person('Seymore',['Brianna'],50,200);
-    const person5 = new Person('Lindsey',['Theodore'],20,140);
-    const person6 = new Person('Charles',['Henry'],33,176);
-    const person7 = new Person('Thomas',['Henry'],24,152);
-    const person8 = new Person('Hanzel',['Henry'],33,175);
+    const person0 = new Person('Theodore',['Henry', 'Brianna', 'Lindsey'],15,160, (Math.random() * 10000));
+    const person1 = new Person('Henry',['Hanzel','Thomas','Charles','Theodore','Brianna'],40,170, (Math.random() * 10000));
+    const person2 = new Person('Brianna',['Theodore', 'Henry','Natasha', 'Seymore'],29,120, (Math.random() * 10000));
+    const person3 = new Person('Natasha',['Brianna'],35,135, (Math.random() * 10000));
+    const person4 = new Person('Seymore',['Brianna'],50,200, (Math.random() * 10000));
+    const person5 = new Person('Lindsey',['Theodore'],20,140, (Math.random() * 10000));
+    const person6 = new Person('Charles',['Henry'],33,176, (Math.random() * 10000));
+    const person7 = new Person('Thomas',['Henry'],24,152, (Math.random() * 10000));
+    const person8 = new Person('Hanzel',['Henry'],33,175, (Math.random() * 10000));
     this.store.dispatch(addPerson({person:person0}));
     this.store.dispatch(addPerson({person:person1}));
     this.store.dispatch(addPerson({person:person2}));

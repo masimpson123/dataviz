@@ -33,8 +33,9 @@ export class FriendVisualizerNetworkComponent {
     const nodes: Node[] = [];
     const links: LinkData[] = [];
     for(let person of peopleData){
+      const seed = Math.random();
       const node: Node = {
-        "id": person.age + person.weight,
+        "id": person.id,
         "name": person.name,
       };
       nodes.push(node);
@@ -45,8 +46,8 @@ export class FriendVisualizerNetworkComponent {
           if(person2.name === friend){
             friendData = person2;
             const link: LinkData = {
-              "source":person.age+person.weight,
-              "target":friendData.age+friendData.weight,
+              "source":person.id,
+              "target":friendData.id,
             }
             links.push(link);
           }
