@@ -13,8 +13,8 @@ import * as d3 from 'd3';
 })
 export class FriendVisualizerComponent {
   @Input() tabUpdate: number = 0;
-  people$: Observable<Person[]>;
-  private people: Person[] = [];
+  people$: Observable<Map<string,Person>>;
+  private people: Map<string,Person> = new Map();
   // TODO(michaelsimpson): find a better way to typecast this.svg
   /* eslint-disable  @typescript-eslint/no-explicit-any */
   private svg:any;
@@ -24,7 +24,7 @@ export class FriendVisualizerComponent {
 
   // TODO(michaelsimpson): remove store from this component.
   // Data should be fetched in parent (ie dashboard)
-  constructor(public store: Store<{ people: Person[] }>) {
+  constructor(public store: Store<{ people: Map<string,Person> }>) {
     this.people$ = store.select('people');
     this.people$.subscribe((res)=>{
       this.people=res;
@@ -48,7 +48,14 @@ export class FriendVisualizerComponent {
 
   // TODO(michaelsimpson): update this graph so that display name and UUID are decoupled
   // so that duplicate name entries can exist.
-  private drawBars(data: any[]): void {
+  private drawBars(dataInput: Map<string,Person>): void {
+      const data:Person[] = [];
+      // TODO(michaelsimpson): update this graph so that the people data does
+      // not have to be converted into an array
+      this.people.forEach((value: Person,key:string) => {
+        data.push(value);
+      });
+      Array.from(dataInput);
       // Create the X-axis band scale
       const x = d3.scaleBand()
       .range([0, this.width])

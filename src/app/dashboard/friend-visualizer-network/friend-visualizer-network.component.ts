@@ -29,41 +29,36 @@ export class FriendVisualizerNetworkComponent {
 
   // TODO(michaelsimpson): remove store from this component.
   // Data should be fetched in parent (ie dashboard)
-  constructor(public store: Store<{ people: Person[] }>) { }
+  constructor(public store: Store<{ people: Map<string,Person> }>) { }
 
-  setData(peopleData:Person[]){
+  setData(peopleData:Map<string,Person>){
     const nodes: Node[] = [];
     const links: LinkData[] = [];
-    for(let person of peopleData){
+    peopleData.forEach((value: Person,key:string) => {
       const seed = Math.random();
       const node: Node = {
-        "id": person.id,
-        "name": person.name,
+        "id": value.id,
+        "name": value.name,
       };
       nodes.push(node);
-      for(let friend of person.friends){
-        let friendData: Person;
-        // TODO(michaelsimpson): peopleData should be a map of all the people.
-        // This would allow constant time retrievals based on unique display name.
-        for(let person2 of peopleData){
-          if(person2.name === friend){
-            friendData = person2;
-            const link: LinkData = {
-              "source":person.id,
-              "target":friendData.id,
-            }
-            links.push(link);
+      for(let friend of value.friends){
+        let friendData = peopleData.get(friend);
+        if(friendData) {
+          const link: LinkData = {
+          "source":value.id,
+          "target":friendData.id,
           }
+          links.push(link);
         }
       }
-    }
+    });
     this.data["nodes"]=nodes;
     this.data["links"]=links;
   };
 
   ngOnChanges() {
     const people$ = this.store.select('people');
-    people$.pipe(take(1)).subscribe((res: Person[])=>{
+    people$.pipe(take(1)).subscribe((res: Map<string,Person>)=>{
       this.setData(res);
       this.createSvg();
       this.drawNetwork(this.data);

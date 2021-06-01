@@ -11,8 +11,8 @@ import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
   styleUrls: ['./friend-input.component.css']
 })
 export class FriendInputComponent {
-  people$: Observable<Person[]>;
-  people: Person[] = [];
+  people$: Observable<Map<string,Person>>;
+  people: Map<string,Person> = new Map();
   // TODO(michaelsimpson): properly validate this data
   personForm = new FormGroup({
     name: new FormControl(''),
@@ -31,7 +31,7 @@ export class FriendInputComponent {
     this.friends.push(this.fb.control(''));
   }
 
-  constructor(private store: Store<{ people: Person[] }>,private fb: FormBuilder) {
+  constructor(private store: Store<{ people: Map<string,Person> }>,private fb: FormBuilder) {
     // TODO(michaelsimpson): can this be replaced with an async pipe
     // in the template?
     this.people$ = store.select('people');
@@ -44,7 +44,7 @@ export class FriendInputComponent {
   // so that it indicates one way friendships
   addPerson() {
     for(let person of this.people){
-      if (person.name === this.personForm.controls.name.value) {
+      if (this.people.has(this.personForm.controls.name.value)) {
         alert("Duplicate entries not permitted!");
         return;
       }
@@ -71,13 +71,13 @@ export class FriendInputComponent {
   }
 
   addMockData() {
-    for(let person of this.people){
+    this.people.forEach((value: Person,key:string) => {
       const mockDataNames = ['Theodore','Henry','Brianna','Natasha','Seymore','Lindsey','Charles','Thomas','Hanzel'];
-      if (mockDataNames.includes(person.name)) {
+      if (mockDataNames.includes(value.name)) {
         alert("Duplicate entries not permitted!");
         return;
       }
-    }
+    });
     const person0 = new Person('Theodore',['Henry', 'Brianna', 'Lindsey'],15,160, (Math.random() * 10000));
     const person1 = new Person('Henry',['Hanzel','Thomas','Charles','Theodore','Brianna'],40,170, (Math.random() * 10000));
     const person2 = new Person('Brianna',['Theodore', 'Henry','Natasha', 'Seymore'],29,120, (Math.random() * 10000));

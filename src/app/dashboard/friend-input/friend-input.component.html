@@ -25,11 +25,11 @@
   <button (click)="addMockData()" mat-raised-button color="accent">Add Mock Data</button>
   <br>
   <br>
-  <mat-card *ngIf="people.length">
+  <mat-card *ngIf="people.size">
   <mat-list dense>
     <div mat-subheader>PEOPLE</div>
-    <mat-list-item *ngFor="let person of people">
-      <div mat-line>{{person.name}}</div>
+    <mat-list-item *ngFor="let person of people | keyvalue">
+      <div mat-line>{{person.key}}</div>
     </mat-list-item>
   </mat-list>
   </mat-card>
