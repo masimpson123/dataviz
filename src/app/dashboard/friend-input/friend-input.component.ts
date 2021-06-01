@@ -40,6 +40,8 @@ export class FriendInputComponent {
     });
   }
 
+  // TODO(michaelsimpson): ensure all friendships are mutual or update network graph
+  // so that it indicates one way friendships
   addPerson() {
     for(let person of this.people){
       if (person.name === this.personForm.controls.name.value) {
