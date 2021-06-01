@@ -22,6 +22,8 @@ export class FriendVisualizerComponent {
   private width = 500 - (this.margin * 2);
   private height = 300 - (this.margin * 2);
 
+  // TODO(michaelsimpson): remove store from this component.
+  // Data should be fetched in parent (ie dashboard)
   constructor(public store: Store<{ people: Person[] }>) {
     this.people$ = store.select('people');
     this.people$.subscribe((res)=>{

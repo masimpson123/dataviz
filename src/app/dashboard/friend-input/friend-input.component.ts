@@ -71,6 +71,13 @@ export class FriendInputComponent {
   }
 
   addMockData() {
+    for(let person of this.people){
+      const mockDataNames = ['Theodore','Henry','Brianna','Natasha','Seymore','Lindsey','Charles','Thomas','Hanzel'];
+      if (mockDataNames.includes(person.name)) {
+        alert("Duplicate entries not permitted!");
+        return;
+      }
+    }
     const person0 = new Person('Theodore',['Henry', 'Brianna', 'Lindsey'],15,160, (Math.random() * 10000));
     const person1 = new Person('Henry',['Hanzel','Thomas','Charles','Theodore','Brianna'],40,170, (Math.random() * 10000));
     const person2 = new Person('Brianna',['Theodore', 'Henry','Natasha', 'Seymore'],29,120, (Math.random() * 10000));

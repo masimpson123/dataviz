@@ -27,6 +27,8 @@ export class FriendVisualizerNetworkComponent {
   private width = 600 - this.margin.left - this.margin.right;
   private height = 400 - this.margin.top - this.margin.bottom;
 
+  // TODO(michaelsimpson): remove store from this component.
+  // Data should be fetched in parent (ie dashboard)
   constructor(public store: Store<{ people: Person[] }>) { }
 
   setData(peopleData:Person[]){
@@ -41,7 +43,8 @@ export class FriendVisualizerNetworkComponent {
       nodes.push(node);
       for(let friend of person.friends){
         let friendData: Person;
-        // TODO(michaelsimpson): find a better way to fetch friend data
+        // TODO(michaelsimpson): peopleData should be a map of all the people.
+        // This would allow constant time retrievals based on unique display name.
         for(let person2 of peopleData){
           if(person2.name === friend){
             friendData = person2;
