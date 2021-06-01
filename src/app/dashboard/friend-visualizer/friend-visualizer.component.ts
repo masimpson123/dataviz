@@ -45,7 +45,7 @@ export class FriendVisualizerComponent {
   }
 
   // TODO(michaelsimpson): update this graph so that display name and UUID are decoupled
-  // or ensure every entry has a unique display name.
+  // so that duplicate name entries can exist.
   private drawBars(data: any[]): void {
       // Create the X-axis band scale
       const x = d3.scaleBand()
