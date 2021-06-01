@@ -18,7 +18,7 @@ describe('FriendVisualizerNetworkComponent', () => {
   });
 
   beforeEach(() => {
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 12000;
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 13000;
     fixture = TestBed.createComponent(FriendVisualizerNetworkComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -36,7 +36,7 @@ describe('FriendVisualizerNetworkComponent', () => {
   // https://hughmccamphill.com/blog/wdio-image-comparison/
   it('should render as expected', async () => {
     component.store.dispatch(reset());
-    await sleep(1000);
+    await sleep(2000);
     populateStore();
     // TODO(michaelsimpson): wrap this component in a test host for more realistic
     // binding and change detection.

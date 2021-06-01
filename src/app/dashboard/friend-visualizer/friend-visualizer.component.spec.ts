@@ -31,7 +31,7 @@ describe('FriendVisualizerComponent', () => {
   // https://hughmccamphill.com/blog/wdio-image-comparison/
   it('should render as expected', async () => {
     component.store.dispatch(reset());
-    await sleep(1000);
+    await sleep(1500);
     populateStore();
     // TODO(michaelsimpson): wrap this component in a test host for more realistic
     // binding and change detection.
