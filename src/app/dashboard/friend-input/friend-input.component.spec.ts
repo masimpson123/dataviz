@@ -77,6 +77,7 @@ describe('FriendInputComponent', () => {
 
     // TODO(michaelsimpson): write expects that confirm friend, age and weight
     // are stored and fetched as expected
+    expect(component.people.size === 2).toBe(true);
     expect(names.includes('Tony')).toBe(true);
     expect(names.includes('Mathew')).toBe(true);
   });

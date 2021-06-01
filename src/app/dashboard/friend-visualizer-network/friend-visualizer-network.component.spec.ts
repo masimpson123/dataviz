@@ -11,8 +11,8 @@ describe('FriendVisualizerNetworkComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ StoreModule.forRoot({ people: friendLoggerReducer }), ],
-      declarations: [ FriendVisualizerNetworkComponent ]
+      imports: [ StoreModule.forRoot({ people: friendLoggerReducer }) ],
+      declarations: [ FriendVisualizerNetworkComponent, ]
     })
     .compileComponents();
   });
@@ -36,7 +36,7 @@ describe('FriendVisualizerNetworkComponent', () => {
   // https://hughmccamphill.com/blog/wdio-image-comparison/
   it('should render as expected', async () => {
     component.store.dispatch(reset());
-    await sleep(2000);
+    // await sleep(2000);
     populateStore();
     // TODO(michaelsimpson): wrap this component in a test host for more realistic
     // binding and change detection.
