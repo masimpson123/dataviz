@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { addPerson, reset } from '../../store/friend-logger.actions';
+import { addPersonProcessing, reset } from '../../store/friend-logger.actions';
 import { Person } from '../../models/Person';
 import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
 
@@ -31,6 +31,10 @@ export class FriendInputComponent {
     this.friends.push(this.fb.control(''));
   }
 
+  deleteFriend(position: number) {
+    this.friends.removeAt(position);
+  }
+
   constructor(private store: Store<{ people: Map<string,Person> }>,private fb: FormBuilder) {
     // TODO(michaelsimpson): can this be replaced with an async pipe
     // in the template?
@@ -54,7 +58,7 @@ export class FriendInputComponent {
     const age = this.personForm.controls.age.value;
     const weight = this.personForm.controls.weight.value;
     const person = new Person(name, friends, age, weight, (Math.random() * 10000));
-    this.store.dispatch(addPerson({person:person}));
+    this.store.dispatch(addPersonProcessing({person:person}));
     this.resetForm();
   }
 
@@ -87,15 +91,15 @@ export class FriendInputComponent {
     const person6 = new Person('Charles',['Henry'],33,176, (Math.random() * 10000));
     const person7 = new Person('Thomas',['Henry'],24,152, (Math.random() * 10000));
     const person8 = new Person('Hanzel',['Henry'],33,175, (Math.random() * 10000));
-    this.store.dispatch(addPerson({person:person0}));
-    this.store.dispatch(addPerson({person:person1}));
-    this.store.dispatch(addPerson({person:person2}));
-    this.store.dispatch(addPerson({person:person3}));
-    this.store.dispatch(addPerson({person:person4}));
-    this.store.dispatch(addPerson({person:person5}));
-    this.store.dispatch(addPerson({person:person6}));
-    this.store.dispatch(addPerson({person:person7}));
-    this.store.dispatch(addPerson({person:person8}));
+    this.store.dispatch(addPersonProcessing({person:person0}));
+    this.store.dispatch(addPersonProcessing({person:person1}));
+    this.store.dispatch(addPersonProcessing({person:person2}));
+    this.store.dispatch(addPersonProcessing({person:person3}));
+    this.store.dispatch(addPersonProcessing({person:person4}));
+    this.store.dispatch(addPersonProcessing({person:person5}));
+    this.store.dispatch(addPersonProcessing({person:person6}));
+    this.store.dispatch(addPersonProcessing({person:person7}));
+    this.store.dispatch(addPersonProcessing({person:person8}));
   }
 
   resetStore(){

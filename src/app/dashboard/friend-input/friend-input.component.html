@@ -4,11 +4,15 @@
     <input type="text" matInput placeholder="Name" formControlName="name">
   </mat-form-field>
   <div formArrayName="friends">
-    <mat-form-field
-      *ngFor="let friend of friends.controls; let i=index">
-      <mat-label>Friend {{i+1}}:</mat-label>
-      <input matInput placeholder="Friend" [formControlName]="i">
-    </mat-form-field>
+    <div *ngFor="let friend of friends.controls; let i=index">
+      <mat-form-field style="width:90%">
+        <mat-label>Friend {{i+1}}:</mat-label>
+        <input matInput placeholder="Friend" [formControlName]="i">
+      </mat-form-field>
+      <div style="width:10%; float:right;">
+      <button mat-mini-fab (click)="deleteFriend(i)"><mat-icon>cancel</mat-icon></button>
+      </div>
+    </div>
     <button mat-raised-button (click)="addFriend()">Add Friend +</button>
   </div>
   <mat-form-field>
