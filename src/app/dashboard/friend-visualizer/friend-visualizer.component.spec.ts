@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { friendLoggerReducer } from '../../store/friend-logger.reducer';
 import { StoreModule } from '@ngrx/store';
 import { FriendVisualizerComponent } from './friend-visualizer.component';
-import { addPerson, reset } from '../../store/friend-logger.actions';
+import { addPersonSuccess, reset } from '../../store/friend-logger.actions';
 import { Person } from '../../models/Person';
 
 describe('FriendVisualizerComponent', () => {
@@ -52,14 +52,14 @@ describe('FriendVisualizerComponent', () => {
     const person6 = new Person('Charles',['Henry'],33,176, (Math.random() * 10000));
     const person7 = new Person('Thomas',['Henry'],24,152, (Math.random() * 10000));
     const person8 = new Person('Hanzel',['Henry'],33,175, (Math.random() * 10000));
-    component.store.dispatch(addPerson({person:person0}));
-    component.store.dispatch(addPerson({person:person1}));
-    component.store.dispatch(addPerson({person:person2}));
-    component.store.dispatch(addPerson({person:person3}));
-    component.store.dispatch(addPerson({person:person4}));
-    component.store.dispatch(addPerson({person:person5}));
-    component.store.dispatch(addPerson({person:person6}));
-    component.store.dispatch(addPerson({person:person7}));
-    component.store.dispatch(addPerson({person:person8}));
+    component.store.dispatch(addPersonSuccess({person:person0}));
+    component.store.dispatch(addPersonSuccess({person:person1}));
+    component.store.dispatch(addPersonSuccess({person:person2}));
+    component.store.dispatch(addPersonSuccess({person:person3}));
+    component.store.dispatch(addPersonSuccess({person:person4}));
+    component.store.dispatch(addPersonSuccess({person:person5}));
+    component.store.dispatch(addPersonSuccess({person:person6}));
+    component.store.dispatch(addPersonSuccess({person:person7}));
+    component.store.dispatch(addPersonSuccess({person:person8}));
   }
 });

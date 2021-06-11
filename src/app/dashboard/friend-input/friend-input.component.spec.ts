@@ -11,6 +11,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule } from '@angular/material/icon';
+import { EffectsModule } from '@ngrx/effects';
+import { PersonDataIntegrityEffects } from '../../effects/person-data-integrity.effects';
 
 describe('FriendInputComponent', () => {
   let component: FriendInputComponent;
@@ -20,12 +23,14 @@ describe('FriendInputComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         StoreModule.forRoot({ people: friendLoggerReducer }),
+        EffectsModule.forRoot([PersonDataIntegrityEffects]),
         ReactiveFormsModule,
         MatInputModule,
         MatButtonModule,
         MatTabsModule,
         MatListModule,
         MatCardModule,
+        MatIconModule,
         NoopAnimationsModule,
       ],
       declarations: [ FriendInputComponent ],
