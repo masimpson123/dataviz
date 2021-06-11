@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { Person } from '../../models/Person';
 import { Store } from '@ngrx/store';
+import { NetworkDataParseService } from '../../services/network-data-parse.service';
 
 import * as d3 from 'd3';
 
@@ -17,10 +18,7 @@ export class FriendVisualizerNetworkComponent {
   @Input() tabUpdate: number = 0;
   @Input() people: Map<string,Person> = new Map();
 
-  private data: NetworkGraph = {
-    "nodes": [],
-    "links": [],
-  }
+  constructor(private parser: NetworkDataParseService){}
 
   // TODO(michaelsimpson): find a better way to typecast this.svg
   /* eslint-disable  @typescript-eslint/no-explicit-any */
@@ -29,35 +27,10 @@ export class FriendVisualizerNetworkComponent {
   private width = 600 - this.margin.left - this.margin.right;
   private height = 400 - this.margin.top - this.margin.bottom;
 
-  setData(peopleData:Map<string,Person>){
-    const nodes: Node[] = [];
-    const links: LinkData[] = [];
-    peopleData.forEach((value: Person,key:string) => {
-      const seed = Math.random();
-      const node: Node = {
-        "id": value.id,
-        "name": value.name,
-      };
-      nodes.push(node);
-      for(let friend of value.friends){
-        let friendData = peopleData.get(friend);
-        if(friendData) {
-          const link: LinkData = {
-          "source":value.id,
-          "target":friendData.id,
-          }
-          links.push(link);
-        }
-      }
-    });
-    this.data["nodes"]=nodes;
-    this.data["links"]=links;
-  };
-
   ngOnChanges() {
-    this.setData(this.people);
+    const data = this.parser.parseData(this.people);
     this.createSvg();
-    this.drawNetwork(this.data);
+    this.drawNetwork(data);
   }
 
   private createSvg(){
