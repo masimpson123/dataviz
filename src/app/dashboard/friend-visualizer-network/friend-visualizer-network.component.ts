@@ -15,6 +15,8 @@ import * as d3 from 'd3';
 })
 export class FriendVisualizerNetworkComponent {
   @Input() tabUpdate: number = 0;
+  @Input() people: Map<string,Person> = new Map();
+
   private data: NetworkGraph = {
     "nodes": [],
     "links": [],
@@ -26,10 +28,6 @@ export class FriendVisualizerNetworkComponent {
   private margin = {top: 10, right: 30, bottom: 30, left: 40};
   private width = 600 - this.margin.left - this.margin.right;
   private height = 400 - this.margin.top - this.margin.bottom;
-
-  // TODO(michaelsimpson): remove store from this component.
-  // Data should be fetched in parent (ie dashboard)
-  constructor(public store: Store<{ people: Map<string,Person> }>) { }
 
   setData(peopleData:Map<string,Person>){
     const nodes: Node[] = [];
@@ -57,12 +55,9 @@ export class FriendVisualizerNetworkComponent {
   };
 
   ngOnChanges() {
-    const people$ = this.store.select('people');
-    people$.pipe(take(1)).subscribe((res: Map<string,Person>)=>{
-      this.setData(res);
-      this.createSvg();
-      this.drawNetwork(this.data);
-    });
+    this.setData(this.people);
+    this.createSvg();
+    this.drawNetwork(this.data);
   }
 
   private createSvg(){

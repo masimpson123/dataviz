@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { friendLoggerReducer } from '../../store/friend-logger.reducer';
-import { StoreModule } from '@ngrx/store';
+import { Store, StoreModule } from '@ngrx/store';
 import { FriendVisualizerComponent } from './friend-visualizer.component';
 import { addPersonSuccess, reset } from '../../store/friend-logger.actions';
 import { Person } from '../../models/Person';
@@ -8,6 +8,7 @@ import { Person } from '../../models/Person';
 describe('FriendVisualizerComponent', () => {
   let component: FriendVisualizerComponent;
   let fixture: ComponentFixture<FriendVisualizerComponent>;
+  let store: Store;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -15,6 +16,7 @@ describe('FriendVisualizerComponent', () => {
       declarations: [ FriendVisualizerComponent ]
     })
     .compileComponents();
+    store = TestBed.get(Store);
   });
 
   beforeEach(() => {
@@ -30,8 +32,7 @@ describe('FriendVisualizerComponent', () => {
   // TODO(michaelsimpson): look into jasmine screendiff options.
   // https://hughmccamphill.com/blog/wdio-image-comparison/
   it('should render as expected', () => {
-    component.store.dispatch(reset());
-    populateStore();
+    component.people = populateStore();
     // TODO(michaelsimpson): wrap this component in a test host for more realistic
     // binding and change detection.
     // https://angular.io/guide/testing-components-scenarios#component-inside-a-test-host
@@ -42,24 +43,17 @@ describe('FriendVisualizerComponent', () => {
   });
 
   // TODO(michaelsimpson): pull this out into a test utility
-  function populateStore(){
-    const person0 = new Person('Theodore',['Henry', 'Brianna', 'Lindsey'],15,160, (Math.random() * 10000));
-    const person1 = new Person('Henry',['Hanzel','Thomas','Charles','Theodore','Brianna'],40,170, (Math.random() * 10000));
-    const person2 = new Person('Brianna',['Theodore', 'Henry','Natasha', 'Seymore'],29,120, (Math.random() * 10000));
-    const person3 = new Person('Natasha',['Brianna'],35,135, (Math.random() * 10000));
-    const person4 = new Person('Seymore',['Brianna'],50,200, (Math.random() * 10000));
-    const person5 = new Person('Lindsey',['Theodore'],20,140, (Math.random() * 10000));
-    const person6 = new Person('Charles',['Henry'],33,176, (Math.random() * 10000));
-    const person7 = new Person('Thomas',['Henry'],24,152, (Math.random() * 10000));
-    const person8 = new Person('Hanzel',['Henry'],33,175, (Math.random() * 10000));
-    component.store.dispatch(addPersonSuccess({person:person0}));
-    component.store.dispatch(addPersonSuccess({person:person1}));
-    component.store.dispatch(addPersonSuccess({person:person2}));
-    component.store.dispatch(addPersonSuccess({person:person3}));
-    component.store.dispatch(addPersonSuccess({person:person4}));
-    component.store.dispatch(addPersonSuccess({person:person5}));
-    component.store.dispatch(addPersonSuccess({person:person6}));
-    component.store.dispatch(addPersonSuccess({person:person7}));
-    component.store.dispatch(addPersonSuccess({person:person8}));
+  function populateStore():Map<string,Person> {
+    const people = new Map<string,Person>();
+    people.set('Theodore',new Person('Theodore',['Henry', 'Brianna', 'Lindsey'],15,160, (Math.random() * 10000)));
+    people.set('Henry',new Person('Henry',['Hanzel','Thomas','Charles','Theodore','Brianna'],40,170, (Math.random() * 10000)));
+    people.set('Brianna',new Person('Brianna',['Theodore', 'Henry','Natasha', 'Seymore'],29,120, (Math.random() * 10000)));
+    people.set('Natasha',new Person('Natasha',['Brianna'],35,135, (Math.random() * 10000)));
+    people.set('Seymore',new Person('Seymore',['Brianna'],50,200, (Math.random() * 10000)));
+    people.set('Lindsey',new Person('Lindsey',['Theodore'],20,140, (Math.random() * 10000)));
+    people.set('Charles',new Person('Charles',['Henry'],33,176, (Math.random() * 10000)));
+    people.set('Thomas',new Person('Thomas',['Henry'],24,152, (Math.random() * 10000)));
+    people.set('Hanzel',new Person('Hanzel',['Henry'],33,175, (Math.random() * 10000)));
+    return people;
   }
 });

@@ -1,7 +1,15 @@
 <mat-tab-group mat-align-tabs="center" (selectedTabChange)="change()">
-  <mat-tab label="DATA INPUT"> <app-friend-input></app-friend-input> </mat-tab>
+  <mat-tab label="DATA INPUT">
+    <app-friend-input></app-friend-input>
+  </mat-tab>
   <mat-tab label="DATA ANALYZE">
-    <app-friend-visualizer [tabUpdate]="tabUpdate"></app-friend-visualizer>
-    <app-friend-visualizer-network [tabUpdate]="tabUpdate"></app-friend-visualizer-network>
+    <app-friend-visualizer
+      [tabUpdate]="tabUpdate"
+      [people]="people"
+      ></app-friend-visualizer>
+    <app-friend-visualizer-network
+      [tabUpdate]="tabUpdate"
+      [people]="people"
+      ></app-friend-visualizer-network>
   </mat-tab>
 </mat-tab-group>

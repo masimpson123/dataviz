@@ -2,7 +2,6 @@ import { Component, Input, OnChanges } from '@angular/core';
 import { FrameWorkMetrics } from '../../models/frame-work-metrics';
 import { Observable } from 'rxjs';
 import { Person } from '../../models/Person';
-import { Store } from '@ngrx/store';
 
 import * as d3 from 'd3';
 
@@ -13,23 +12,14 @@ import * as d3 from 'd3';
 })
 export class FriendVisualizerComponent {
   @Input() tabUpdate: number = 0;
-  people$: Observable<Map<string,Person>>;
-  private people: Map<string,Person> = new Map();
+  @Input() people: Map<string,Person> = new Map();
+
   // TODO(michaelsimpson): find a better way to typecast this.svg
   /* eslint-disable  @typescript-eslint/no-explicit-any */
   private svg:any;
   private margin = 50;
   private width = 500 - (this.margin * 2);
   private height = 300 - (this.margin * 2);
-
-  // TODO(michaelsimpson): remove store from this component.
-  // Data should be fetched in parent (ie dashboard)
-  constructor(public store: Store<{ people: Map<string,Person> }>) {
-    this.people$ = store.select('people');
-    this.people$.subscribe((res)=>{
-      this.people=res;
-    });
-  }
 
   ngOnChanges() {
     this.createSvg();
