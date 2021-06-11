@@ -42,9 +42,6 @@ describe('FriendVisualizerNetworkComponent', () => {
     const links = document.querySelectorAll("svg line");
     const nodes = document.querySelectorAll("svg circle");
     // expect two lines for each of the nine node connections
-    console.log(links.length);
-    console.log(links.length);
-    console.log(links.length);
     expect(links.length === 18).toBe(true);
     // expect 9 nodes
     expect(nodes.length === 9).toBe(true);
