@@ -7,5 +7,5 @@ import { Observable } from 'rxjs';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'friend-logger';
+  title = 'Michael Simpson';
 }
