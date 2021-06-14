@@ -32,15 +32,13 @@ describe('AppComponent', () => {
   it('can write to and read from firestore', (done) => {
     const firestore = TestBed.get(AngularFirestore);
     const messageWrite = "test_"+Math.random();
-    console.log(messageWrite);
     let messageRead = '';
     firestore.collection('test').add({message:messageWrite});
     const people = firestore.collection('test').valueChanges({ idField: 'id' }) as Observable<{ message: string; id: string; }[]>;
     // TODO(michaelsimpson): find a better way to typecast this.svg
-    /* eslint-disable  @typescript-eslint/no-explicit-any */ /*
+    /* eslint-disable  @typescript-eslint/no-explicit-any */
     people.subscribe((res)=>{
       messageRead = res[0].message;
-      console.log(messageRead);
       expect(messageWrite === messageRead).toBe(true);
       done();
     });

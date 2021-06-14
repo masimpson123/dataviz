@@ -14,6 +14,10 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { EffectsModule } from '@ngrx/effects';
 import { PersonDataIntegrityEffects } from '../../effects/person-data-integrity.effects';
+import { FirebaseService } from '../../services/firebase.service';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireModule } from '@angular/fire';
+import { firebaseConfig } from 'src/environments/environment';
 
 describe('FriendInputComponent', () => {
   let component: FriendInputComponent;
@@ -21,6 +25,9 @@ describe('FriendInputComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [
+        FirebaseService
+      ],
       imports: [
         StoreModule.forRoot({ people: friendLoggerReducer }),
         EffectsModule.forRoot([PersonDataIntegrityEffects]),
@@ -32,6 +39,8 @@ describe('FriendInputComponent', () => {
         MatCardModule,
         MatIconModule,
         NoopAnimationsModule,
+        AngularFireModule.initializeApp(firebaseConfig),
+        AngularFirestoreModule
       ],
       declarations: [ FriendInputComponent ],
     })
