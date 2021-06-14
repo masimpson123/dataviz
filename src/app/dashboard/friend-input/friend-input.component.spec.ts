@@ -23,10 +23,12 @@ describe('FriendInputComponent', () => {
   let component: FriendInputComponent;
   let fixture: ComponentFixture<FriendInputComponent>;
 
+  const firebaseServiceMock = jasmine.createSpyObj('FirebaseService', ['write']);
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       providers: [
-        FirebaseService
+        { provide: FirebaseService, useValue: firebaseServiceMock }
       ],
       imports: [
         StoreModule.forRoot({ people: friendLoggerReducer }),
