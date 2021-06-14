@@ -27,7 +27,7 @@ describe('AppComponent', () => {
   it(`should have as title 'friend-logger'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('friend-logger');
+    expect(app.title).toEqual('Michael Simpson');
   });
 
   it('can write to and read from firestore', (done) => {
