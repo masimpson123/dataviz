@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "michael-simpson": {
+      "hosting": {
+        "friend-logger": [
+          "michael-simpson"
+        ]
+      }
+    }
+  }
+}

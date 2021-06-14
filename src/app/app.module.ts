@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppComponent } from './app.component';
-
 import { DashboardModule } from './dashboard/dashboard.module';
 import { StoreModule } from '@ngrx/store';
 import { friendLoggerReducer } from './store/friend-logger.reducer';
@@ -10,6 +8,10 @@ import { friendLoggerReducer } from './store/friend-logger.reducer';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { EffectsModule } from '@ngrx/effects';
 import { PersonDataIntegrityEffects } from './effects/person-data-integrity.effects';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { firebaseConfig } from 'src/environments/environment';
+
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { PersonDataIntegrityEffects } from './effects/person-data-integrity.effe
     // BrowserAnimationsModule,
     NoopAnimationsModule,
     EffectsModule.forRoot([PersonDataIntegrityEffects]),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFirestoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]

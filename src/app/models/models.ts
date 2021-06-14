@@ -22,3 +22,11 @@ export interface NetworkGraph {
   nodes: Node[];
   links: LinkData[];
 }
+
+export interface FirebasePerson {
+  id: string;
+  name: string;
+  friends: string[];
+  age: string;
+  weight: string;
+}

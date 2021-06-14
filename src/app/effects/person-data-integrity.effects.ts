@@ -17,6 +17,8 @@ export class PersonDataIntegrityEffects {
   ) {}
 
   // TODO(michaelsimpson): add error handling
+  // TODO(michaelsimpson): error if name is already in use or allow
+  // duplicate names
   personDataIntegrity$ = createEffect(() => this.actions$.pipe(
     ofType(actions.addPersonProcessing),
     switchMap(action => this.friendValidator.nullCheck(action.person).pipe(

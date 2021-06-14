@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { addPersonProcessing, reset } from '../../store/friend-logger.actions';
 import { Person } from '../../models/Person';
 import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
+import { FirebaseService } from '../../services/firebase.service';
 
 @Component({
   selector: 'app-friend-input',
@@ -35,7 +36,11 @@ export class FriendInputComponent {
     this.friends.removeAt(position);
   }
 
-  constructor(private store: Store<{ people: Map<string,Person> }>,private fb: FormBuilder) {
+  constructor(
+    private store: Store<{ people: Map<string,Person> }>,
+    private fb: FormBuilder,
+    private firebaseService: FirebaseService,
+  ) {
     // TODO(michaelsimpson): can this be replaced with an async pipe
     // in the template?
     this.people$ = store.select('people');
@@ -59,6 +64,7 @@ export class FriendInputComponent {
     const weight = this.personForm.controls.weight.value;
     const person = new Person(name, friends, age, weight, (Math.random() * 10000));
     this.store.dispatch(addPersonProcessing({person:person}));
+    this.firebaseService.write(person);
     this.resetForm();
   }
 
@@ -74,35 +80,11 @@ export class FriendInputComponent {
     this.addFriend();
   }
 
-  addMockData() {
-    this.people.forEach((value: Person,key:string) => {
-      const mockDataNames = ['Theodore','Henry','Brianna','Natasha','Seymore','Lindsey','Charles','Thomas','Hanzel'];
-      if (mockDataNames.includes(value.name)) {
-        alert("Duplicate entries not permitted!");
-        return;
-      }
-    });
-    const person0 = new Person('Theodore',['Henry', 'Brianna', 'Lindsey'],15,160, (Math.random() * 10000));
-    const person1 = new Person('Henry',['Hanzel','Thomas','Charles','Theodore','Brianna'],40,170, (Math.random() * 10000));
-    const person2 = new Person('Brianna',['Theodore', 'Henry','Natasha', 'Seymore'],29,120, (Math.random() * 10000));
-    const person3 = new Person('Natasha',['Brianna'],35,135, (Math.random() * 10000));
-    const person4 = new Person('Seymore',['Brianna'],50,200, (Math.random() * 10000));
-    const person5 = new Person('Lindsey',['Theodore'],20,140, (Math.random() * 10000));
-    const person6 = new Person('Charles',['Henry'],33,176, (Math.random() * 10000));
-    const person7 = new Person('Thomas',['Henry'],24,152, (Math.random() * 10000));
-    const person8 = new Person('Hanzel',['Henry'],33,175, (Math.random() * 10000));
-    this.store.dispatch(addPersonProcessing({person:person0}));
-    this.store.dispatch(addPersonProcessing({person:person1}));
-    this.store.dispatch(addPersonProcessing({person:person2}));
-    this.store.dispatch(addPersonProcessing({person:person3}));
-    this.store.dispatch(addPersonProcessing({person:person4}));
-    this.store.dispatch(addPersonProcessing({person:person5}));
-    this.store.dispatch(addPersonProcessing({person:person6}));
-    this.store.dispatch(addPersonProcessing({person:person7}));
-    this.store.dispatch(addPersonProcessing({person:person8}));
-  }
-
   resetStore(){
     this.store.dispatch(reset());
+  }
+
+  loadFirebaseStore(){
+    this.firebaseService.read();
   }
 }
