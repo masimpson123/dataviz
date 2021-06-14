@@ -3,6 +3,7 @@ import { AppComponent } from './app.component';
 import { AppModule } from './app.module';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -37,7 +38,7 @@ describe('AppComponent', () => {
     const people = firestore.collection('test').valueChanges({ idField: 'id' }) as Observable<{ message: string; id: string; }[]>;
     // TODO(michaelsimpson): find a better way to typecast this.svg
     /* eslint-disable  @typescript-eslint/no-explicit-any */
-    people.subscribe((res)=>{
+    people.pipe(take(1)).subscribe((res)=>{
       messageRead = res[0].message;
       expect(messageWrite === messageRead).toBe(true);
       done();
