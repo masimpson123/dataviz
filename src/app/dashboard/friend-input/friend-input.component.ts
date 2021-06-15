@@ -62,7 +62,7 @@ export class FriendInputComponent {
     const friends = this.personForm.controls.friends.value;
     const age = this.personForm.controls.age.value;
     const weight = this.personForm.controls.weight.value;
-    const person = new Person(name, friends, age, weight, (Math.random() * 10000));
+    const person = new Person(name, friends, age, weight, (Math.random() * 100_000));
     this.store.dispatch(addPersonProcessing({person:person}));
     this.firebaseService.write(person);
     this.resetForm();

@@ -36,7 +36,7 @@ describe('AppComponent', () => {
     let messageRead = '';
     firestore.collection('test').add({message:messageWrite});
     const people = firestore.collection('test').valueChanges({ idField: 'id' }) as Observable<{ message: string; id: string; }[]>;
-    // TODO(michaelsimpson): find a better way to typecast this.svg
+    // TODO(michaelsimpson): find a better way to typecast res
     /* eslint-disable  @typescript-eslint/no-explicit-any */
     people.pipe(take(1)).subscribe((res)=>{
       messageRead = res[0].message;
