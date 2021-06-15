@@ -24,6 +24,12 @@ export class PersonDataIntegrityEffects {
     switchMap(action => this.friendValidator.nullCheck(action.person).pipe(
       concatLatestFrom(() => this.store.select('people')),
       mergeMap(([person,people]) => {
+        // ensure duplicates are not input into the NgRx Store
+        people.forEach((value: Person,key:string) => {
+          if (person.name === value.name) {
+            throw new Error('NO DUPLICATE ENTRIES (' + person.name + ")");
+          }
+        });
         // ensure friendship links are mutual
         for (let friend of person.friends) {
           if(people.has(friend)){
@@ -43,6 +49,7 @@ export class PersonDataIntegrityEffects {
         return of(person);
       }),
       map(value => actions.addPersonSuccess({person:value})),
+      catchError((error) => of(actions.addPersonFailure({error:error}))),
     ))
   ));
 
