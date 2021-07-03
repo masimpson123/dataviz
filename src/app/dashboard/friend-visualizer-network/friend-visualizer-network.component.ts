@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, ViewChild, ElementRef } from '@angular/core';
 import { FrameWorkMetrics } from '../../models/frame-work-metrics';
 import { Node, LinkData, Link, Coordinates, NetworkGraph } from '../../models/models';
 import { Observable } from 'rxjs';
@@ -18,19 +18,24 @@ export class FriendVisualizerNetworkComponent {
   @Input() tabUpdate: number = 0;
   @Input() people: Map<string,Person> = new Map();
 
+  @ViewChild('networkFigure') networkFigure?: ElementRef;
+
   constructor(private parser: NetworkDataParseService){}
 
   // TODO(michaelsimpson): find a better way to typecast this.svg
   /* eslint-disable  @typescript-eslint/no-explicit-any */
   private svg:any;
-  private margin = {top: 10, right: 30, bottom: 30, left: 40};
-  private width = 600 - this.margin.left - this.margin.right;
-  private height = 400 - this.margin.top - this.margin.bottom;
+  private width = 100;
+  private height = 100;
 
   ngOnChanges() {
-    const data = this.parser.parseData(this.people);
-    this.createSvg();
-    this.drawNetwork(data);
+    if(this.networkFigure){
+      this.width = this.networkFigure.nativeElement.offsetWidth;
+      this.height = this.networkFigure.nativeElement.offsetHeight;
+      const data = this.parser.parseData(this.people);
+      this.createSvg();
+      this.drawNetwork(data);
+    }
   }
 
   private createSvg(){
@@ -38,11 +43,10 @@ export class FriendVisualizerNetworkComponent {
     // append the svg object to the body of the page
     this.svg = d3.select("#my_dataviz")
     .append("svg")
-    .attr("width", this.width + this.margin.left + this.margin.right)
-    .attr("height", this.height + this.margin.top + this.margin.bottom)
-    .append("g")
-    .attr("transform",
-    "translate(" + this.margin.left + "," + this.margin.top + ")");
+    .attr("width", this.width)
+    .attr("height", this.height)
+    .attr("style", "background-color:#5A6673; border-radius: 10px;")
+    .append("g");
   }
 
   // TODO(michaelsimpson): find a better way to typecast data
@@ -79,7 +83,7 @@ export class FriendVisualizerNetworkComponent {
     .links(data.links)
     )
     .force("charge", d3.forceManyBody().strength(-400))
-    .force("center", d3.forceCenter(this.width / 2, this.height / 2))
+    .force("center", d3.forceCenter(this.width / 2, this.height / 2 - 30))
     .on("end", ticked);
 
     function ticked() {

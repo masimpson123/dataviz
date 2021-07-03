@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, ViewChild, ElementRef } from '@angular/core';
 import { FrameWorkMetrics } from '../../models/frame-work-metrics';
 import { Observable } from 'rxjs';
 import { Person } from '../../models/Person';
@@ -14,16 +14,22 @@ export class FriendVisualizerComponent {
   @Input() tabUpdate: number = 0;
   @Input() people: Map<string,Person> = new Map();
 
+  @ViewChild('barFigure') barFigure?: ElementRef;
+
   // TODO(michaelsimpson): find a better way to typecast this.svg
   /* eslint-disable  @typescript-eslint/no-explicit-any */
   private svg:any;
   private margin = 50;
-  private width = 500 - (this.margin * 2);
-  private height = 300 - (this.margin * 2);
+  private width = 100;
+  private height = 100;
 
   ngOnChanges() {
-    this.createSvg();
-    this.drawBars(this.people);
+    if(this.barFigure){
+      this.width = this.barFigure.nativeElement.offsetWidth - (this.margin * 2);
+      this.height = this.barFigure.nativeElement.offsetHeight - (this.margin * 2);
+      this.createSvg();
+      this.drawBars(this.people);
+    }
   }
 
   private createSvg(): void {
@@ -32,6 +38,7 @@ export class FriendVisualizerComponent {
     .append("svg")
     .attr("width", this.width + (this.margin * 2))
     .attr("height", this.height + (this.margin * 2))
+    .attr("style", "background-color:#5A6673; border-radius: 10px;")
     .append("g")
     .attr("transform", "translate(" + this.margin + "," + this.margin + ")");
   }
@@ -62,7 +69,7 @@ export class FriendVisualizerComponent {
 
       // Create the Y-axis band scale
       const y = d3.scaleLinear()
-      .domain([0, 5])
+      .domain([0, 10])
       .range([this.height, 0]);
 
       // Draw the Y-axis on the DOM
