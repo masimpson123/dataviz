@@ -83,7 +83,7 @@ export class FriendVisualizerNetworkComponent {
     .links(data.links)
     )
     .force("charge", d3.forceManyBody().strength(-400))
-    .force("center", d3.forceCenter(this.width / 2, this.height / 2 - 30))
+    .force("center", d3.forceCenter(this.width / 2 + 50, this.height / 2 + 100))
     .on("end", ticked);
 
     function ticked() {
