@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DashboardModule } from '../dashboard.module';
 import { DashboardComponent } from './dashboard.component';
-import { friendLoggerReducer } from '../../store/friend-logger.reducer';
+import { michaelIOAppReducer } from '../../store/michael-io-app.reducer';
 import { StoreModule } from '@ngrx/store';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FirebaseService } from '../../services/firebase.service';
@@ -21,7 +21,7 @@ describe('DashboardComponent', () => {
       declarations: [ DashboardComponent ],
       imports: [
         DashboardModule,
-        StoreModule.forRoot({ people: friendLoggerReducer }),
+        StoreModule.forRoot({ people: michaelIOAppReducer }),
         NoopAnimationsModule,
         AngularFireModule.initializeApp(firebaseConfig),
         AngularFirestoreModule

@@ -3,7 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { Person } from '../models/Person';
-import { addPersonProcessing } from '../store/friend-logger.actions';
+import { addPersonProcessing } from '../store/michael-io-app.actions';
 import { Store } from '@ngrx/store';
 import { FirebasePerson } from '../models/models';
 

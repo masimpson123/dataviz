@@ -10,11 +10,11 @@ import { NetworkDataParseService } from '../../services/network-data-parse.servi
 import * as d3 from 'd3';
 
 @Component({
-  selector: 'app-friend-visualizer-network',
-  templateUrl: './friend-visualizer-network.component.html',
-  styleUrls: ['./friend-visualizer-network.component.css']
+  selector: 'app-data-visualizer-network',
+  templateUrl: './data-visualizer-network.component.html',
+  styleUrls: ['./data-visualizer-network.component.css']
 })
-export class FriendVisualizerNetworkComponent {
+export class DataVisualizerNetworkComponent {
   @Input() tabUpdate: number = 0;
   @Input() people: Map<string,Person> = new Map();
 
@@ -46,7 +46,7 @@ export class FriendVisualizerNetworkComponent {
     .attr("width", this.width)
     .attr("height", this.height)
     .attr("style", "background-color:#5A6673; border-radius: 10px;")
-    .append("g");
+    .append("g")
   }
 
   // TODO(michaelsimpson): find a better way to typecast data
@@ -83,7 +83,7 @@ export class FriendVisualizerNetworkComponent {
     .links(data.links)
     )
     .force("charge", d3.forceManyBody().strength(-400))
-    .force("center", d3.forceCenter(this.width / 2 + 50, this.height / 2 + 100))
+    .force("center", d3.forceCenter((this.width / 2)-(this.width * .1), this.height / 2))
     .on("end", ticked);
 
     function ticked() {

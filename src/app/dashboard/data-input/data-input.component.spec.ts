@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Person } from '../../models/Person';
-import { FriendInputComponent } from './friend-input.component';
-import { friendLoggerReducer } from '../../store/friend-logger.reducer';
+import { DataInputComponent } from './data-input.component';
+import { michaelIOAppReducer } from '../../store/michael-io-app.reducer';
 import { StoreModule } from '@ngrx/store';
 import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -19,9 +19,9 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire';
 import { firebaseConfig } from 'src/environments/environment';
 
-describe('FriendInputComponent', () => {
-  let component: FriendInputComponent;
-  let fixture: ComponentFixture<FriendInputComponent>;
+describe('DataInputComponent', () => {
+  let component: DataInputComponent;
+  let fixture: ComponentFixture<DataInputComponent>;
 
   const firebaseServiceMock = jasmine.createSpyObj('FirebaseService', ['write']);
 
@@ -31,7 +31,7 @@ describe('FriendInputComponent', () => {
         { provide: FirebaseService, useValue: firebaseServiceMock }
       ],
       imports: [
-        StoreModule.forRoot({ people: friendLoggerReducer }),
+        StoreModule.forRoot({ people: michaelIOAppReducer }),
         EffectsModule.forRoot([PersonDataIntegrityEffects]),
         ReactiveFormsModule,
         MatInputModule,
@@ -44,13 +44,13 @@ describe('FriendInputComponent', () => {
         AngularFireModule.initializeApp(firebaseConfig),
         AngularFirestoreModule
       ],
-      declarations: [ FriendInputComponent ],
+      declarations: [ DataInputComponent ],
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FriendInputComponent);
+    fixture = TestBed.createComponent(DataInputComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

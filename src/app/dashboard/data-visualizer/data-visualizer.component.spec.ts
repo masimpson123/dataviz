@@ -1,29 +1,28 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { friendLoggerReducer } from '../../store/friend-logger.reducer';
-import { FriendVisualizerNetworkComponent } from './friend-visualizer-network.component';
-import { addPersonSuccess, reset } from '../../store/friend-logger.actions';
+import { michaelIOAppReducer } from '../../store/michael-io-app.reducer';
+import { Store, StoreModule } from '@ngrx/store';
+import { DataVisualizerComponent } from './data-visualizer.component';
+import { addPersonSuccess, reset } from '../../store/michael-io-app.actions';
 import { Person } from '../../models/Person';
 
-describe('FriendVisualizerNetworkComponent', () => {
-  let component: FriendVisualizerNetworkComponent;
-  let fixture: ComponentFixture<FriendVisualizerNetworkComponent>;
+describe('DataVisualizerComponent', () => {
+  let component: DataVisualizerComponent;
+  let fixture: ComponentFixture<DataVisualizerComponent>;
+  let store: Store;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FriendVisualizerNetworkComponent, ]
+      imports: [ StoreModule.forRoot({ people: michaelIOAppReducer }), ],
+      declarations: [ DataVisualizerComponent ]
     })
     .compileComponents();
+    store = TestBed.get(Store);
   });
 
   beforeEach(() => {
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 100_000;
-    fixture = TestBed.createComponent(FriendVisualizerNetworkComponent);
+    fixture = TestBed.createComponent(DataVisualizerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
-
-  afterEach(() => {
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 5000;
   });
 
   it('should initialize as expected', () => {
@@ -32,19 +31,15 @@ describe('FriendVisualizerNetworkComponent', () => {
 
   // TODO(michaelsimpson): look into jasmine screendiff options.
   // https://hughmccamphill.com/blog/wdio-image-comparison/
-  it('should render as expected', async () => {
+  it('should render as expected', () => {
     component.people = populateStore();
     // TODO(michaelsimpson): wrap this component in a test host for more realistic
     // binding and change detection.
     // https://angular.io/guide/testing-components-scenarios#component-inside-a-test-host
     component.ngOnChanges();
-    await sleep(9000);
-    const links = document.querySelectorAll("svg line");
-    const nodes = document.querySelectorAll("svg circle");
-    // expect two lines for each of the nine node connections
-    expect(links.length === 18).toBe(true);
-    // expect 9 nodes
-    expect(nodes.length === 9).toBe(true);
+    const bars = document.querySelectorAll("svg rect");
+    // expect one bar for each of the 9 people
+    expect(bars.length === 9).toBe(true);
   });
 
   // TODO(michaelsimpson): pull this out into a test utility
@@ -60,9 +55,5 @@ describe('FriendVisualizerNetworkComponent', () => {
     people.set('Thomas',new Person('Thomas',['Henry'],24,152, (Math.random() * 100_000)));
     people.set('Hanzel',new Person('Hanzel',['Henry'],33,175, (Math.random() * 100_000)));
     return people;
-  }
-
-  function sleep(ms:number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
   }
 });

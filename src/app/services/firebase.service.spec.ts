@@ -5,7 +5,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { FirebaseService } from './firebase.service';
 import { firebaseConfig } from 'src/environments/environment';
 import { StoreModule } from '@ngrx/store';
-import { friendLoggerReducer } from '../store/friend-logger.reducer';
+import { michaelIOAppReducer } from '../store/michael-io-app.reducer';
 
 describe('FirebaseService', () => {
   let service: FirebaseService;
@@ -16,7 +16,7 @@ describe('FirebaseService', () => {
         AngularFirestore,
       ],
       imports: [
-        StoreModule.forRoot({ people: friendLoggerReducer }),
+        StoreModule.forRoot({ people: michaelIOAppReducer }),
         AngularFireModule.initializeApp(firebaseConfig),
         AngularFirestoreModule
       ]

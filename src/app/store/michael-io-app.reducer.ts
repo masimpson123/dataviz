@@ -1,11 +1,11 @@
 import { createReducer, on, Action } from '@ngrx/store';
-import { addPersonFailure, addPersonSuccess, addFriend, reset } from './friend-logger.actions';
+import { addPersonFailure, addPersonSuccess, addFriend, reset } from './michael-io-app.actions';
 import { Person } from '../models/Person';
 
-export let friendLoggerState:Map<string,Person> = new Map();
+export let michaelIOAppState:Map<string,Person> = new Map();
 
-const _friendLoggerReducer = createReducer(
-  friendLoggerState,
+const _michaelIOAppReducer = createReducer(
+  michaelIOAppState,
   on(addPersonSuccess, (state,action) => state.set(action.person.name,action.person)),
   on(addFriend, (state,action) => state.set(
       action.friend.name,
@@ -24,6 +24,6 @@ const _friendLoggerReducer = createReducer(
     return state;
   }));
 
-export function friendLoggerReducer(state:Map<string,Person>|undefined, action: Action) {
-  return _friendLoggerReducer(state, action);
+export function michaelIOAppReducer(state:Map<string,Person>|undefined, action: Action) {
+  return _michaelIOAppReducer(state, action);
 }

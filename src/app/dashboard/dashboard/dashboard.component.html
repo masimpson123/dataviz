@@ -1,17 +1,17 @@
 <mat-tab-group mat-align-tabs="center" (selectedTabChange)="change()">
   <mat-tab label="DATA INPUT">
-    <app-friend-input></app-friend-input>
+    <app-data-input></app-data-input>
   </mat-tab>
   <mat-tab label="DATA ANALYZE">
-    <app-friend-visualizer
+    <app-data-visualizer
       [tabUpdate]="tabUpdate"
       [people]="people"
-      ></app-friend-visualizer>
+      ></app-data-visualizer>
     <br>
-    <app-friend-visualizer-network
+    <app-data-visualizer-network
       [tabUpdate]="tabUpdate"
       [people]="people"
-      ></app-friend-visualizer-network>
+      ></app-data-visualizer-network>
     <br>
     <br>
   </mat-tab>

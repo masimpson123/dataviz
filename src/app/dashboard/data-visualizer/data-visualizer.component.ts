@@ -6,11 +6,11 @@ import { Person } from '../../models/Person';
 import * as d3 from 'd3';
 
 @Component({
-  selector: 'app-friend-visualizer',
-  templateUrl: './friend-visualizer.component.html',
-  styleUrls: ['./friend-visualizer.component.css']
+  selector: 'app-data-visualizer',
+  templateUrl: './data-visualizer.component.html',
+  styleUrls: ['./data-visualizer.component.css']
 })
-export class FriendVisualizerComponent {
+export class DataVisualizerComponent {
   @Input() tabUpdate: number = 0;
   @Input() people: Map<string,Person> = new Map();
 

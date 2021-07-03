@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { StoreModule } from '@ngrx/store';
-import { friendLoggerReducer } from './store/friend-logger.reducer';
+import { michaelIOAppReducer } from './store/michael-io-app.reducer';
 // import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { EffectsModule } from '@ngrx/effects';
@@ -20,7 +20,7 @@ import { firebaseConfig } from 'src/environments/environment';
   imports: [
     BrowserModule,
     DashboardModule,
-    StoreModule.forRoot({ people: friendLoggerReducer }),
+    StoreModule.forRoot({ people: michaelIOAppReducer }),
     // BrowserAnimationsModule,
     NoopAnimationsModule,
     EffectsModule.forRoot([PersonDataIntegrityEffects]),

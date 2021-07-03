@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import * as actions from '../store/friend-logger.actions';
+import * as actions from '../store/michael-io-app.actions';
 import { Actions, createEffect, ofType, concatLatestFrom } from '@ngrx/effects';
 import { tap, map, mergeMap, switchMap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
@@ -30,7 +30,7 @@ export class PersonDataIntegrityEffects {
             throw new Error('NO DUPLICATE ENTRIES (' + person.name + ")");
           }
         });
-        // ensure friendship links are mutual
+        // ensure friendship links are mutual in NgRx store (ie no Firestore)
         for (let friend of person.friends) {
           if(people.has(friend)){
             const friendData = people.get(friend)!;

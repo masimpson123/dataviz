@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { addPersonProcessing, reset } from '../../store/friend-logger.actions';
+import { addPersonProcessing, reset } from '../../store/michael-io-app.actions';
 import { Person } from '../../models/Person';
 import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
 import { FirebaseService } from '../../services/firebase.service';
 
 @Component({
-  selector: 'app-friend-input',
-  templateUrl: './friend-input.component.html',
-  styleUrls: ['./friend-input.component.css']
+  selector: 'app-data-input',
+  templateUrl: './data-input.component.html',
+  styleUrls: ['./data-input.component.css']
 })
-export class FriendInputComponent {
+export class DataInputComponent {
   people$: Observable<Map<string,Person>>;
   people: Map<string,Person> = new Map();
   // TODO(michaelsimpson): properly validate this data
