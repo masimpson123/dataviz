@@ -13,7 +13,6 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { firebaseConfig } from 'src/environments/environment';
 import { NasaModule } from 'src/app/nasa/nasa.module';
 import { HttpClientModule } from '@angular/common/http';
-import { AppRoutingModule } from './app.routing.module'; // CLI imports AppRoutingModule
 
 @NgModule({
   declarations: [
@@ -30,7 +29,6 @@ import { AppRoutingModule } from './app.routing.module'; // CLI imports AppRouti
     AngularFirestoreModule,
     NasaModule,
     HttpClientModule,
-    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

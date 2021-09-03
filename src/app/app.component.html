@@ -1,1 +1,2 @@
-<router-outlet></router-outlet>
+<app-dashboard *ngIf="nasa !== 'true'"></app-dashboard>
+<app-nasa *ngIf="nasa === 'true'"></app-nasa>
