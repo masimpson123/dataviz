@@ -11,7 +11,9 @@ import { PersonDataIntegrityEffects } from './effects/person-data-integrity.effe
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { firebaseConfig } from 'src/environments/environment';
-
+import { NasaModule } from 'src/app/nasa/nasa.module';
+import { HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule } from './app.routing.module'; // CLI imports AppRoutingModule
 
 @NgModule({
   declarations: [
@@ -25,7 +27,10 @@ import { firebaseConfig } from 'src/environments/environment';
     NoopAnimationsModule,
     EffectsModule.forRoot([PersonDataIntegrityEffects]),
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    NasaModule,
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
