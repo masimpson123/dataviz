@@ -12,6 +12,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { firebaseConfig } from 'src/environments/environment';
 import { NasaModule } from 'src/app/nasa/nasa.module';
+import { RxjsModule } from 'src/app/rxjs/rxjs.module';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -28,6 +29,7 @@ import { HttpClientModule } from '@angular/common/http';
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
     NasaModule,
+    RxjsModule,
     HttpClientModule,
   ],
   providers: [],

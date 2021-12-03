@@ -69,8 +69,8 @@ describe('DataInputComponent', () => {
     friendsInput.setValue(['Jonathan']);
     let ageInput = form.controls.age;
     ageInput.setValue('32');
-    let weightInput = form.controls.weight;
-    weightInput.setValue('180');
+    let luckyNumberInput = form.controls.luckyNumber;
+    luckyNumberInput.setValue('180');
 
     component.addPerson();
 
@@ -80,8 +80,8 @@ describe('DataInputComponent', () => {
     friendsInput.setValue(['Carly']);
     ageInput = form.controls.age;
     ageInput.setValue('29');
-    weightInput = form.controls.weight;
-    weightInput.setValue('120');
+    luckyNumberInput = form.controls.luckyNumber;
+    luckyNumberInput.setValue('120');
 
     component.addPerson();
 
@@ -91,7 +91,7 @@ describe('DataInputComponent', () => {
       names.push(value.name);
     });
 
-    // TODO(michaelsimpson): write expects that confirm friend, age and weight
+    // TODO(michaelsimpson): write expects that confirm friend, age and luckyNumber
     // are stored and fetched as expected
     expect(component.people.size === 2).toBe(true);
     expect(names.includes('Tony')).toBe(true);

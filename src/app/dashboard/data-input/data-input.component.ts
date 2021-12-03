@@ -21,7 +21,7 @@ export class DataInputComponent {
       this.fb.control('')
     ]),
     age: new FormControl(''),
-    weight: new FormControl(''),
+    luckyNumber: new FormControl(''),
   });
 
   get friends() {
@@ -61,8 +61,8 @@ export class DataInputComponent {
     const name = this.personForm.controls.name.value;
     const friends = this.personForm.controls.friends.value;
     const age = this.personForm.controls.age.value;
-    const weight = this.personForm.controls.weight.value;
-    const person = new Person(name, friends, age, weight, (Math.random() * 100_000));
+    const luckyNumber = this.personForm.controls.luckyNumber.value;
+    const person = new Person(name, friends, age, luckyNumber, (Math.random() * 100_000));
     this.store.dispatch(addPersonProcessing({person:person}));
     this.firebaseService.write(person);
     this.resetForm();
@@ -71,7 +71,7 @@ export class DataInputComponent {
   formInvalid(){
     return !this.personForm.controls.name.value ||
       !this.personForm.controls.age.value ||
-      !this.personForm.controls.weight.value
+      !this.personForm.controls.luckyNumber.value
   }
 
   resetForm() {

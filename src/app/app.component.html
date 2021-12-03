@@ -1,2 +1,3 @@
-<app-dashboard *ngIf="nasa !== 'true'"></app-dashboard>
+<app-dashboard *ngIf="nasa !== 'true' && rxjs !== 'true'"></app-dashboard>
 <app-nasa *ngIf="nasa === 'true'"></app-nasa>
+<app-rxjs *ngIf="rxjs === 'true'"></app-rxjs>

@@ -28,6 +28,11 @@ export class NasaService {
         })
       );
   }
+
+  fetch(url:string): Observable<Object> {
+    console.log("FETCH");
+    return this.http.get(url);
+  }
 }
 
-const API_KEY = "3GHkYstXAVVX0LNoNMVibp2gh1guVXKduRxlDdtd";
+export const API_KEY = "3GHkYstXAVVX0LNoNMVibp2gh1guVXKduRxlDdtd";
