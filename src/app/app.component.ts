@@ -11,4 +11,5 @@ export class AppComponent {
   urlParams = new URLSearchParams(window.location.search);
   nasa = this.urlParams.get('nasa');
   rxjs = this.urlParams.get('rxjs');
+  angular = this.urlParams.get('angular');
 }
