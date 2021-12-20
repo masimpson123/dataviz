@@ -33,7 +33,7 @@ export class FirebaseService {
             person.name,
             person.friends,
             Number(person.age),
-            Number(person.weight),
+            Number(person.luckyNumber),
             (Math.random() * 100_000));
           this.store.dispatch(addPersonProcessing({person:newPerson}));
         }

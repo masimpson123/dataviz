@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { fromEvent, from, Observable, interval } from 'rxjs';
-import { take } from 'rxjs/operators';
-import { throttleTime, map, scan, concatAll, exhaust, mergeAll, switchAll } from 'rxjs/operators';
+import { fromEvent, of, from, Observable, interval, combineLatest } from 'rxjs';
+import { throttleTime, map, scan, concatAll, exhaust, mergeAll, switchAll, take, mergeMap } from 'rxjs/operators';
 import { NasaService, API_KEY } from '../../nasa/nasa.service';
 
 @Component({
@@ -10,6 +9,8 @@ import { NasaService, API_KEY } from '../../nasa/nasa.service';
   styleUrls: ['./rxjs.component.css']
 })
 export class RxjsComponent implements OnInit {
+
+  observableOne$: Observable<object>;
 
   constructor(public nasa: NasaService){
 
@@ -22,15 +23,39 @@ export class RxjsComponent implements OnInit {
     // mergeMap(), concatMap(), exhuastMap() and switchMap() do these two part
     // operations in one : )
     // combineLatest is another way to join values from numerous sources
-    let observableOne$ = from(endpoints).pipe(
-    map((x:string) => this.nasa.fetch(x)),
+    // let observableOne$ = from(endpoints).pipe(
+    this.observableOne$ = of(endpoints).pipe(
+      // map((x:string) => this.nasa.fetch(x)),
       // exhaust(), // second and third are ignored
       // mergeAll(), // all print in order last, first second
       // switchAll(), // first two requests are canceled. This operator switches to the newest emitted value
-      concatAll(), // all print in the expected order first second third
+      // concatAll(), // all print in the expected order first second third
+
+      // convert an array of endpoint strings to an array of observable requests
+      // and rapidly initialize each request:
+      map(endpoints => endpoints.map((x:string) => this.nasa.fetch(x))),
+
+      // combineLatest causes the execution to asynchronously wait for each
+      // input observable to emit
+      // mergeMap causes observableOne$ to emit the values that are emitted by
+      // the inner observables (ie the observables created by combineLatest()
+      // and fetch())
+      // requests is an array of observables
+      mergeMap(requests => combineLatest(requests))
     );
 
-    observableOne$.subscribe((x:Object|undefined)=>console.log(x));
+    /*
+    hostnameEffect = createEffect(
+    () => this.actions$.pipe(
+        ofType(actions.fetchSubBuildingFloorOverview),
+        map(() => ['one', 'two', 'three']),
+        map(hostnames => hostnames.map(hostname => this.fetchMock(hostname))),
+        mergeMap(
+            fetchedData => combineLatest(fetchedData).pipe(
+                map((data) => actions.setFloorContent({content: null}))))));
+    */
+
+    // observableOne$.subscribe((x:Object|undefined) => console.log(x));
   }
 
   ngOnInit(): void {

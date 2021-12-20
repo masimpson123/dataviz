@@ -2,7 +2,7 @@ import { TestScheduler } from 'rxjs/testing';
 import { throttleTime } from 'rxjs/operators';
 import { streamOne$ } from './rxjs.component';
 
-fdescribe('',()=>{
+describe('',()=>{
   let testScheduler:any = null;
   beforeEach(()=>{
     testScheduler = new TestScheduler((actual, expected) => {

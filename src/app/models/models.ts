@@ -28,5 +28,5 @@ export interface FirebasePerson {
   name: string;
   friends: string[];
   age: string;
-  weight: string;
+  luckyNumber: string;
 }
