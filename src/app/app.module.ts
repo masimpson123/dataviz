@@ -15,6 +15,7 @@ import { NasaModule } from 'src/app/nasa/nasa.module';
 import { RxjsModule } from 'src/app/rxjs/rxjs.module';
 import { AngularModule } from 'src/app/angular/angular.module';
 import { HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { HttpClientModule } from '@angular/common/http';
     RxjsModule,
     AngularModule,
     HttpClientModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
