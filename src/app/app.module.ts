@@ -16,6 +16,7 @@ import { RxjsModule } from 'src/app/rxjs/rxjs.module';
 import { AngularModule } from 'src/app/angular/angular.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
+import { SubRouterModule } from './sub-router/sub-router.module';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,9 @@ import { AppRoutingModule } from './app-routing.module';
     RxjsModule,
     AngularModule,
     HttpClientModule,
-    AppRoutingModule
+    // order matters with routes
+    SubRouterModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

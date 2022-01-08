@@ -13,10 +13,10 @@ const routes: Routes = [
   { path: 'rxjs', component: RxjsComponent },
   { path: 'angular', component: AngularComponent },
   { path: 'nasa', component: NasaComponent },
+  { path: 'root', loadChildren: () => import('./sub-router/sub-router.module').then(m => m.SubRouterModule)},
   { path: '**', component: DashboardComponent },
 ];
 
-// configures NgModule imports and exports
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
