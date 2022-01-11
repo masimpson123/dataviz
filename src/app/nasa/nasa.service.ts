@@ -30,7 +30,6 @@ export class NasaService {
   }
 
   fetch(url:string): Observable<Object> {
-    console.log("FETCH");
     return this.http.get(url);
   }
 }

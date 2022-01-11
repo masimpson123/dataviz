@@ -8,8 +8,4 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent {
   title = 'Michael Simpson';
-  urlParams = new URLSearchParams(window.location.search);
-  nasa = this.urlParams.get('nasa');
-  rxjs = this.urlParams.get('rxjs');
-  angular = this.urlParams.get('angular');
 }

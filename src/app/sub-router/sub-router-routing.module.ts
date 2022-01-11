@@ -5,7 +5,7 @@ import { AngularComponent } from 'src/app/angular/angular/angular.component';
 
 // the SubRouterComponent has a children and a router-outlet
 const routes: Routes = [
-  { path: '',
+  { path: 'root',
   component: SubRouterComponent,
     children: [
       {

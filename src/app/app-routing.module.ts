@@ -10,9 +10,11 @@ import { NasaComponent } from 'src/app/nasa/nasa/nasa.component';
 import { DashboardComponent } from 'src/app/dashboard/dashboard/dashboard.component';
 
 const routes: Routes = [
+  { path: 'dashboard', component: DashboardComponent },
   { path: 'rxjs', component: RxjsComponent },
   { path: 'angular', component: AngularComponent },
   { path: 'nasa', component: NasaComponent },
+  // it seems the module must be lazy loaded for the sub router to behave as intended
   { path: 'root', loadChildren: () => import('./sub-router/sub-router.module').then(m => m.SubRouterModule)},
   { path: '**', component: DashboardComponent },
 ];
