@@ -109,6 +109,37 @@
           "options": {}
         }
       }
+    },
+    "michaels-library-u92ac304": {
+      "projectType": "library",
+      "root": "projects/michaels-library-u92ac304",
+      "sourceRoot": "projects/michaels-library-u92ac304/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/michaels-library-u92ac304/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/michaels-library-u92ac304/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/michaels-library-u92ac304/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/michaels-library-u92ac304/src/test.ts",
+            "tsConfig": "projects/michaels-library-u92ac304/tsconfig.spec.json",
+            "karmaConfig": "projects/michaels-library-u92ac304/karma.conf.js"
+          }
+        }
+      }
     }
   },
   "defaultProject": "friend-logger"

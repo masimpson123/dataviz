@@ -9,6 +9,12 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
+    "paths": {
+      "michaels-library-u92ac304": [
+        "dist/michaels-library-u92ac304/michaels-library-u92ac304",
+        "dist/michaels-library-u92ac304"
+      ]
+    },
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
