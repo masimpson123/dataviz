@@ -23,7 +23,7 @@ export class FirebaseService {
       name: person.name,
       age: person.age,
       friends: person.friends,
-      weight: person.weight,
+      security: person.security,
     });
   }
   read() {
@@ -33,7 +33,7 @@ export class FirebaseService {
             person.name,
             person.friends,
             Number(person.age),
-            Number(person.luckyNumber),
+            person.security,
             (Math.random() * 100_000));
         this.store.dispatch(addPersonProcessing({person: newPerson}));
       }

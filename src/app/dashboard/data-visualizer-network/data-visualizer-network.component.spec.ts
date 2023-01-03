@@ -50,15 +50,15 @@ describe('DataVisualizerNetworkComponent', () => {
   // TODO(michaelsimpson): pull this out into a test utility
   function populateStore():Map<string, Person> {
     const people = new Map<string, Person>();
-    people.set('Theodore', new Person('Theodore', ['Henry', 'Brianna', 'Lindsey'], 15, 160, (Math.random() * 100_000)));
-    people.set('Henry', new Person('Henry', ['Hanzel', 'Thomas', 'Charles', 'Theodore', 'Brianna'], 40, 170, (Math.random() * 100_000)));
-    people.set('Brianna', new Person('Brianna', ['Theodore', 'Henry', 'Natasha', 'Seymore'], 29, 120, (Math.random() * 100_000)));
-    people.set('Natasha', new Person('Natasha', ['Brianna'], 35, 135, (Math.random() * 100_000)));
-    people.set('Seymore', new Person('Seymore', ['Brianna'], 50, 200, (Math.random() * 100_000)));
-    people.set('Lindsey', new Person('Lindsey', ['Theodore'], 20, 140, (Math.random() * 100_000)));
-    people.set('Charles', new Person('Charles', ['Henry'], 33, 176, (Math.random() * 100_000)));
-    people.set('Thomas', new Person('Thomas', ['Henry'], 24, 152, (Math.random() * 100_000)));
-    people.set('Hanzel', new Person('Hanzel', ['Henry'], 33, 175, (Math.random() * 100_000)));
+    people.set('Theodore', new Person('Theodore', ['Henry', 'Brianna', 'Lindsey'], 15, 'bingo1', (Math.random() * 100_000)));
+    people.set('Henry', new Person('Henry', ['Hanzel', 'Thomas', 'Charles', 'Theodore', 'Brianna'], 40, 'bingo2', (Math.random() * 100_000)));
+    people.set('Brianna', new Person('Brianna', ['Theodore', 'Henry', 'Natasha', 'Seymore'], 29, 'bingo3', (Math.random() * 100_000)));
+    people.set('Natasha', new Person('Natasha', ['Brianna'], 35, 'bingo4', (Math.random() * 100_000)));
+    people.set('Seymore', new Person('Seymore', ['Brianna'], 50, 'bingo5', (Math.random() * 100_000)));
+    people.set('Lindsey', new Person('Lindsey', ['Theodore'], 20, 'bingo6', (Math.random() * 100_000)));
+    people.set('Charles', new Person('Charles', ['Henry'], 33, 'bingo7', (Math.random() * 100_000)));
+    people.set('Thomas', new Person('Thomas', ['Henry'], 24, 'bingo8', (Math.random() * 100_000)));
+    people.set('Hanzel', new Person('Hanzel', ['Henry'], 33, 'bingo9', (Math.random() * 100_000)));
     return people;
   }
 

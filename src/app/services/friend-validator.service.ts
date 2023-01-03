@@ -17,7 +17,7 @@ export class FriendValidatorService {
         person.name,
         friends,
         person.age,
-        person.weight,
+        person.security,
         person.id);
     return of(personMutable);
   }

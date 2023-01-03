@@ -13,7 +13,7 @@ const _michaelIOAppReducer = createReducer(
             action.friend.name,
             [...action.friend.friends, action.person],
             action.friend.age,
-            action.friend.weight,
+            action.friend.security,
             (Math.random() * 100_000)))),
     on(reset, (state, action) => {
       state.clear();
