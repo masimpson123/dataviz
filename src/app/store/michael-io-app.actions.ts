@@ -1,5 +1,5 @@
-import { createAction,props } from '@ngrx/store';
-import { Person } from '../models/Person';
+import {createAction, props} from '@ngrx/store';
+import {Person} from '../models/Person';
 
 export const addPersonProcessing = createAction('[Person Input Component] Add A Person to the person processing flow', props<{person: Person}>());
 export const addPersonSuccess = createAction('[Person Input Component] Add A Person to the Store', props<{person: Person}>());

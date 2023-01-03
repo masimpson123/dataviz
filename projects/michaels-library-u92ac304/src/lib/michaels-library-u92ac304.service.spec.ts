@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { MichaelsLibraryU92ac304Service } from './michaels-library-u92ac304.service';
+import {MichaelsLibraryU92ac304Service} from './michaels-library-u92ac304.service';
 
 describe('MichaelsLibraryU92ac304Service', () => {
   let service: MichaelsLibraryU92ac304Service;

@@ -1,11 +1,11 @@
-import { TestBed } from '@angular/core/testing';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { FirebaseService } from './firebase.service';
-import { firebaseConfig } from 'src/environments/environment';
-import { StoreModule } from '@ngrx/store';
-import { michaelIOAppReducer } from '../store/michael-io-app.reducer';
+import {TestBed} from '@angular/core/testing';
+import {AngularFirestore} from '@angular/fire/firestore';
+import {AngularFireModule} from '@angular/fire';
+import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {FirebaseService} from './firebase.service';
+import {firebaseConfig} from 'src/environments/environment';
+import {StoreModule} from '@ngrx/store';
+import {michaelIOAppReducer} from '../store/michael-io-app.reducer';
 
 describe('FirebaseService', () => {
   let service: FirebaseService;
@@ -16,10 +16,10 @@ describe('FirebaseService', () => {
         AngularFirestore,
       ],
       imports: [
-        StoreModule.forRoot({ people: michaelIOAppReducer }),
+        StoreModule.forRoot({people: michaelIOAppReducer}),
         AngularFireModule.initializeApp(firebaseConfig),
-        AngularFirestoreModule
-      ]
+        AngularFirestoreModule,
+      ],
     });
     service = TestBed.inject(FirebaseService);
   });

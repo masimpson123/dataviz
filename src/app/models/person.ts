@@ -11,7 +11,7 @@ export class Person {
     this.weight = weight;
     this.id = id;
   }
-  addFriend(friend:string){
+  addFriend(friend:string) {
     this.friends.push(friend);
   }
 }

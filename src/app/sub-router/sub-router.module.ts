@@ -1,20 +1,20 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { SubRouterRoutingModule } from './sub-router-routing.module';
-import { SubRouterComponent } from './sub-router/sub-router.component';
+import {SubRouterRoutingModule} from './sub-router-routing.module';
+import {SubRouterComponent} from './sub-router/sub-router.component';
 
 
 @NgModule({
   declarations: [
-    SubRouterComponent
+    SubRouterComponent,
   ],
   exports: [
-    SubRouterComponent
+    SubRouterComponent,
   ],
   imports: [
     CommonModule,
-    SubRouterRoutingModule
-  ]
+    SubRouterRoutingModule,
+  ],
 })
 export class SubRouterModule { }

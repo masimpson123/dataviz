@@ -1,13 +1,13 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DashboardModule } from '../dashboard.module';
-import { DashboardComponent } from './dashboard.component';
-import { michaelIOAppReducer } from '../../store/michael-io-app.reducer';
-import { StoreModule } from '@ngrx/store';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { FirebaseService } from '../../services/firebase.service';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { firebaseConfig } from 'src/environments/environment';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {DashboardModule} from '../dashboard.module';
+import {DashboardComponent} from './dashboard.component';
+import {michaelIOAppReducer} from '../../store/michael-io-app.reducer';
+import {StoreModule} from '@ngrx/store';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {FirebaseService} from '../../services/firebase.service';
+import {AngularFireModule} from '@angular/fire';
+import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {firebaseConfig} from 'src/environments/environment';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -18,16 +18,16 @@ describe('DashboardComponent', () => {
       providers: [
         FirebaseService,
       ],
-      declarations: [ DashboardComponent ],
+      declarations: [DashboardComponent],
       imports: [
         DashboardModule,
-        StoreModule.forRoot({ people: michaelIOAppReducer }),
+        StoreModule.forRoot({people: michaelIOAppReducer}),
         NoopAnimationsModule,
         AngularFireModule.initializeApp(firebaseConfig),
-        AngularFirestoreModule
-      ]
+        AngularFirestoreModule,
+      ],
     })
-    .compileComponents();
+        .compileComponents();
   });
 
   beforeEach(() => {

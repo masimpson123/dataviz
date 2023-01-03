@@ -1,17 +1,17 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { ModuleTwoRoutingModule } from './module-two-routing.module';
-import { LazyComponentOneComponent } from './lazy-component-one/lazy-component-one.component';
+import {ModuleTwoRoutingModule} from './module-two-routing.module';
+import {LazyComponentOneComponent} from './lazy-component-one/lazy-component-one.component';
 
 
 @NgModule({
   declarations: [
-    LazyComponentOneComponent
+    LazyComponentOneComponent,
   ],
   imports: [
     CommonModule,
-    ModuleTwoRoutingModule
-  ]
+    ModuleTwoRoutingModule,
+  ],
 })
 export class ModuleTwoModule { }

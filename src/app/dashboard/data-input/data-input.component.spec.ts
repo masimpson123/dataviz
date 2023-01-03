@@ -1,23 +1,23 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Person } from '../../models/Person';
-import { DataInputComponent } from './data-input.component';
-import { michaelIOAppReducer } from '../../store/michael-io-app.reducer';
-import { StoreModule } from '@ngrx/store';
-import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatListModule } from '@angular/material/list';
-import { MatCardModule } from '@angular/material/card';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MatIconModule } from '@angular/material/icon';
-import { EffectsModule } from '@ngrx/effects';
-import { PersonDataIntegrityEffects } from '../../effects/person-data-integrity.effects';
-import { FirebaseService } from '../../services/firebase.service';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireModule } from '@angular/fire';
-import { firebaseConfig } from 'src/environments/environment';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {Person} from '../../models/Person';
+import {DataInputComponent} from './data-input.component';
+import {michaelIOAppReducer} from '../../store/michael-io-app.reducer';
+import {StoreModule} from '@ngrx/store';
+import {FormGroup, FormControl, FormBuilder, FormArray} from '@angular/forms';
+import {ReactiveFormsModule} from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatListModule} from '@angular/material/list';
+import {MatCardModule} from '@angular/material/card';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {MatIconModule} from '@angular/material/icon';
+import {EffectsModule} from '@ngrx/effects';
+import {PersonDataIntegrityEffects} from '../../effects/person-data-integrity.effects';
+import {FirebaseService} from '../../services/firebase.service';
+import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {AngularFireModule} from '@angular/fire';
+import {firebaseConfig} from 'src/environments/environment';
 
 describe('DataInputComponent', () => {
   let component: DataInputComponent;
@@ -28,10 +28,10 @@ describe('DataInputComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       providers: [
-        { provide: FirebaseService, useValue: firebaseServiceMock }
+        {provide: FirebaseService, useValue: firebaseServiceMock},
       ],
       imports: [
-        StoreModule.forRoot({ people: michaelIOAppReducer }),
+        StoreModule.forRoot({people: michaelIOAppReducer}),
         EffectsModule.forRoot([PersonDataIntegrityEffects]),
         ReactiveFormsModule,
         MatInputModule,
@@ -42,11 +42,11 @@ describe('DataInputComponent', () => {
         MatIconModule,
         NoopAnimationsModule,
         AngularFireModule.initializeApp(firebaseConfig),
-        AngularFirestoreModule
+        AngularFirestoreModule,
       ],
-      declarations: [ DataInputComponent ],
+      declarations: [DataInputComponent],
     })
-    .compileComponents();
+        .compileComponents();
   });
 
   beforeEach(() => {
@@ -87,7 +87,7 @@ describe('DataInputComponent', () => {
 
     const names: string[] = [];
 
-    component.people.forEach((value: Person,key:string) => {
+    component.people.forEach((value: Person, key:string) => {
       names.push(value.name);
     });
 

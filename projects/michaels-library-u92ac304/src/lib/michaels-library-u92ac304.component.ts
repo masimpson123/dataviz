@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'lib-michaels-library-u92ac304',
@@ -8,13 +8,15 @@ import { Component, OnInit } from '@angular/core';
     </p>
   `,
   styles: [
-  ]
+  ],
 })
 export class MichaelsLibraryU92ac304Component implements OnInit {
-
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  bingo() {
+    console.log('BINGO!');
+  }
 }

@@ -1,20 +1,19 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { AngularComponent } from './angular/angular.component';
-import { NgContentTestComponent } from './angular/ng-content-test/ng-content-test.component';
-
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {AngularComponent} from './angular/angular.component';
+import {NgContentTestComponent} from './angular/ng-content-test/ng-content-test.component';
 
 
 @NgModule({
   declarations: [
     AngularComponent,
-    NgContentTestComponent
+    NgContentTestComponent,
   ],
   imports: [
-    CommonModule
+    CommonModule,
   ],
   exports: [
-    AngularComponent
-  ]
+    AngularComponent,
+  ],
 })
 export class AngularModule { }

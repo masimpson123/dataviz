@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { NetworkDataParseService } from './network-data-parse.service';
+import {NetworkDataParseService} from './network-data-parse.service';
 
 describe('NetworkDataParseService', () => {
   let service: NetworkDataParseService;

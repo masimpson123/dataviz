@@ -1,7 +1,7 @@
-import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import {TestBed} from '@angular/core/testing';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 
-import { NasaService } from './nasa.service';
+import {NasaService} from './nasa.service';
 
 describe('NasaService', () => {
   let service: NasaService;
@@ -9,8 +9,8 @@ describe('NasaService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-          HttpClientTestingModule,
-        ]
+        HttpClientTestingModule,
+      ],
     });
     service = TestBed.inject(NasaService);
   });

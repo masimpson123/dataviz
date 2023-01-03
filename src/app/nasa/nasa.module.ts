@@ -1,16 +1,16 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { NasaComponent } from './nasa/nasa.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {NasaComponent} from './nasa/nasa.component';
 
 @NgModule({
   declarations: [
-    NasaComponent
+    NasaComponent,
   ],
   imports: [
-    CommonModule
+    CommonModule,
   ],
   exports: [
-    NasaComponent
-  ]
+    NasaComponent,
+  ],
 })
 export class NasaModule { }

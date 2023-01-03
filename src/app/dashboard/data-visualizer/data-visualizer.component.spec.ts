@@ -1,9 +1,9 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { michaelIOAppReducer } from '../../store/michael-io-app.reducer';
-import { Store, StoreModule } from '@ngrx/store';
-import { DataVisualizerComponent } from './data-visualizer.component';
-import { addPersonSuccess, reset } from '../../store/michael-io-app.actions';
-import { Person } from '../../models/Person';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {michaelIOAppReducer} from '../../store/michael-io-app.reducer';
+import {Store, StoreModule} from '@ngrx/store';
+import {DataVisualizerComponent} from './data-visualizer.component';
+import {addPersonSuccess, reset} from '../../store/michael-io-app.actions';
+import {Person} from '../../models/Person';
 
 describe('DataVisualizerComponent', () => {
   let component: DataVisualizerComponent;
@@ -12,10 +12,10 @@ describe('DataVisualizerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ StoreModule.forRoot({ people: michaelIOAppReducer }), ],
-      declarations: [ DataVisualizerComponent ]
+      imports: [StoreModule.forRoot({people: michaelIOAppReducer})],
+      declarations: [DataVisualizerComponent],
     })
-    .compileComponents();
+        .compileComponents();
     store = TestBed.get(Store);
   });
 
@@ -37,23 +37,23 @@ describe('DataVisualizerComponent', () => {
     // binding and change detection.
     // https://angular.io/guide/testing-components-scenarios#component-inside-a-test-host
     component.ngOnChanges();
-    const bars = document.querySelectorAll("svg rect");
+    const bars = document.querySelectorAll('svg rect');
     // expect one bar for each of the 9 people
     expect(bars.length === 9).toBe(true);
   });
 
   // TODO(michaelsimpson): pull this out into a test utility
-  function populateStore():Map<string,Person> {
-    const people = new Map<string,Person>();
-    people.set('Theodore',new Person('Theodore',['Henry', 'Brianna', 'Lindsey'],15,160, (Math.random() * 100_000)));
-    people.set('Henry',new Person('Henry',['Hanzel','Thomas','Charles','Theodore','Brianna'],40,170, (Math.random() * 100_000)));
-    people.set('Brianna',new Person('Brianna',['Theodore', 'Henry','Natasha', 'Seymore'],29,120, (Math.random() * 100_000)));
-    people.set('Natasha',new Person('Natasha',['Brianna'],35,135, (Math.random() * 100_000)));
-    people.set('Seymore',new Person('Seymore',['Brianna'],50,200, (Math.random() * 100_000)));
-    people.set('Lindsey',new Person('Lindsey',['Theodore'],20,140, (Math.random() * 100_000)));
-    people.set('Charles',new Person('Charles',['Henry'],33,176, (Math.random() * 100_000)));
-    people.set('Thomas',new Person('Thomas',['Henry'],24,152, (Math.random() * 100_000)));
-    people.set('Hanzel',new Person('Hanzel',['Henry'],33,175, (Math.random() * 100_000)));
+  function populateStore():Map<string, Person> {
+    const people = new Map<string, Person>();
+    people.set('Theodore', new Person('Theodore', ['Henry', 'Brianna', 'Lindsey'], 15, 160, (Math.random() * 100_000)));
+    people.set('Henry', new Person('Henry', ['Hanzel', 'Thomas', 'Charles', 'Theodore', 'Brianna'], 40, 170, (Math.random() * 100_000)));
+    people.set('Brianna', new Person('Brianna', ['Theodore', 'Henry', 'Natasha', 'Seymore'], 29, 120, (Math.random() * 100_000)));
+    people.set('Natasha', new Person('Natasha', ['Brianna'], 35, 135, (Math.random() * 100_000)));
+    people.set('Seymore', new Person('Seymore', ['Brianna'], 50, 200, (Math.random() * 100_000)));
+    people.set('Lindsey', new Person('Lindsey', ['Theodore'], 20, 140, (Math.random() * 100_000)));
+    people.set('Charles', new Person('Charles', ['Henry'], 33, 176, (Math.random() * 100_000)));
+    people.set('Thomas', new Person('Thomas', ['Henry'], 24, 152, (Math.random() * 100_000)));
+    people.set('Hanzel', new Person('Hanzel', ['Henry'], 33, 175, (Math.random() * 100_000)));
     return people;
   }
 });

@@ -2,10 +2,10 @@
 
 import 'zone.js';
 import 'zone.js/testing';
-import { getTestBed } from '@angular/core/testing';
+import {getTestBed} from '@angular/core/testing';
 import {
   BrowserDynamicTestingModule,
-  platformBrowserDynamicTesting
+  platformBrowserDynamicTesting,
 } from '@angular/platform-browser-dynamic/testing';
 
 declare const require: {
@@ -17,8 +17,8 @@ declare const require: {
 
 // First, initialize the Angular testing environment.
 getTestBed().initTestEnvironment(
-  BrowserDynamicTestingModule,
-  platformBrowserDynamicTesting()
+    BrowserDynamicTestingModule,
+    platformBrowserDynamicTesting(),
 );
 // Then we find all the tests.
 const context = require.context('./', true, /\.spec\.ts$/);

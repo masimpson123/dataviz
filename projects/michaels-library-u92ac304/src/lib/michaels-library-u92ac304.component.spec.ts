@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { MichaelsLibraryU92ac304Component } from './michaels-library-u92ac304.component';
+import {MichaelsLibraryU92ac304Component} from './michaels-library-u92ac304.component';
 
 describe('MichaelsLibraryU92ac304Component', () => {
   let component: MichaelsLibraryU92ac304Component;
@@ -8,9 +8,9 @@ describe('MichaelsLibraryU92ac304Component', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MichaelsLibraryU92ac304Component ]
+      declarations: [MichaelsLibraryU92ac304Component],
     })
-    .compileComponents();
+        .compileComponents();
   });
 
   beforeEach(() => {

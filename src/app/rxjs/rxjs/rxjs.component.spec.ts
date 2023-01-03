@@ -1,8 +1,8 @@
-import { TestScheduler } from 'rxjs/testing';
-import { throttleTime } from 'rxjs/operators';
-import { streamOne$ } from './rxjs.component';
+import {TestScheduler} from 'rxjs/testing';
+import {throttleTime} from 'rxjs/operators';
+import {streamOne$} from './rxjs.component';
 
-describe('',()=>{
+describe('', ()=>{
   let testScheduler:any = null;
   beforeEach(()=>{
     testScheduler = new TestScheduler((actual, expected) => {
@@ -14,7 +14,7 @@ describe('',()=>{
   // This test runs synchronously.
   it('generates the stream correctly', () => {
     testScheduler.run((helpers:any) => {
-      const { cold, flush, expectObservable, expectSubscriptions } = helpers;
+      const {cold, flush, expectObservable, expectSubscriptions} = helpers;
 
       const t = 5; // t = 3
 
@@ -27,21 +27,21 @@ describe('',()=>{
     });
   });
 
-  it('reliably tests an external observable',()=>{
+  it('reliably tests an external observable', ()=>{
     testScheduler = new TestScheduler((actual, expected) => {
       expect(actual).toEqual(expected);
     });
     testScheduler.run((helpers:any) => {
-      const { expectObservable } = helpers;
+      const {expectObservable} = helpers;
       const expected = '  -abcd(e|)  ';
       const values = {
-        a:0,
-        b:1,
-        c:2,
-        d:3,
-        e:4,
+        a: 0,
+        b: 1,
+        c: 2,
+        d: 3,
+        e: 4,
       };
-      expectObservable(streamOne$).toBe(expected,values);
+      expectObservable(streamOne$).toBe(expected, values);
     });
   });
 });

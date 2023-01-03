@@ -1,24 +1,24 @@
-import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Store } from '@ngrx/store';
-import { addPersonProcessing, reset } from '../../store/michael-io-app.actions';
-import { Person } from '../../models/Person';
-import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
-import { FirebaseService } from '../../services/firebase.service';
+import {Component} from '@angular/core';
+import {Observable} from 'rxjs';
+import {Store} from '@ngrx/store';
+import {addPersonProcessing, reset} from '../../store/michael-io-app.actions';
+import {Person} from '../../models/Person';
+import {FormGroup, FormControl, FormBuilder, FormArray} from '@angular/forms';
+import {FirebaseService} from '../../services/firebase.service';
 
 @Component({
   selector: 'app-data-input',
   templateUrl: './data-input.component.html',
-  styleUrls: ['./data-input.component.css']
+  styleUrls: ['./data-input.component.css'],
 })
 export class DataInputComponent {
-  people$: Observable<Map<string,Person>>;
-  people: Map<string,Person> = new Map();
+  people$: Observable<Map<string, Person>>;
+  people: Map<string, Person> = new Map();
   // TODO(michaelsimpson): properly validate this data
   personForm = new FormGroup({
     name: new FormControl(''),
     friends: this.fb.array([
-      this.fb.control('')
+      this.fb.control(''),
     ]),
     age: new FormControl(''),
     luckyNumber: new FormControl(''),
@@ -37,7 +37,7 @@ export class DataInputComponent {
   }
 
   constructor(
-    private store: Store<{ people: Map<string,Person> }>,
+    private store: Store<{ people: Map<string, Person> }>,
     private fb: FormBuilder,
     private firebaseService: FirebaseService,
   ) {
@@ -52,9 +52,9 @@ export class DataInputComponent {
   // TODO(michaelsimpson): ensure all friendships are mutual or update network graph
   // so that it indicates one way friendships
   addPerson() {
-    for(let person of this.people){
+    for (const person of this.people) {
       if (this.people.has(this.personForm.controls.name.value)) {
-        alert("Duplicate entries not permitted!");
+        alert('Duplicate entries not permitted!');
         return;
       }
     }
@@ -63,15 +63,15 @@ export class DataInputComponent {
     const age = this.personForm.controls.age.value;
     const luckyNumber = this.personForm.controls.luckyNumber.value;
     const person = new Person(name, friends, age, luckyNumber, (Math.random() * 100_000));
-    this.store.dispatch(addPersonProcessing({person:person}));
+    this.store.dispatch(addPersonProcessing({person: person}));
     this.firebaseService.write(person);
     this.resetForm();
   }
 
-  formInvalid(){
+  formInvalid() {
     return !this.personForm.controls.name.value ||
       !this.personForm.controls.age.value ||
-      !this.personForm.controls.luckyNumber.value
+      !this.personForm.controls.luckyNumber.value;
   }
 
   resetForm() {
@@ -80,11 +80,11 @@ export class DataInputComponent {
     this.addFriend();
   }
 
-  resetStore(){
+  resetStore() {
     this.store.dispatch(reset());
   }
 
-  loadFirebaseStore(){
+  loadFirebaseStore() {
     this.firebaseService.read();
   }
 }

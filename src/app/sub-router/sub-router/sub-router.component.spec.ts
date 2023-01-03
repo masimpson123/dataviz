@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SubRouterComponent } from './sub-router.component';
+import {SubRouterComponent} from './sub-router.component';
 
 describe('SubRouterComponent', () => {
   let component: SubRouterComponent;
@@ -8,9 +8,9 @@ describe('SubRouterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SubRouterComponent ]
+      declarations: [SubRouterComponent],
     })
-    .compileComponents();
+        .compileComponents();
   });
 
   beforeEach(() => {

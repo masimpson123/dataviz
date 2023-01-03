@@ -1,9 +1,9 @@
-import { TestBed } from '@angular/core/testing';
-import { AppComponent } from './app.component';
-import { AppModule } from './app.module';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
+import {TestBed} from '@angular/core/testing';
+import {AppComponent} from './app.component';
+import {AppModule} from './app.module';
+import {AngularFirestore} from '@angular/fire/firestore';
+import {Observable} from 'rxjs';
+import {take} from 'rxjs/operators';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -12,9 +12,9 @@ describe('AppComponent', () => {
         AngularFirestore,
       ],
       declarations: [
-        AppComponent
+        AppComponent,
       ],
-      imports: [ AppModule ]
+      imports: [AppModule],
     }).compileComponents();
   });
 
@@ -32,10 +32,10 @@ describe('AppComponent', () => {
 
   it('can write to and read from firestore', (done) => {
     const firestore = TestBed.get(AngularFirestore);
-    const messageWrite = "test_"+Math.random();
+    const messageWrite = 'test_'+Math.random();
     let messageRead = '';
-    firestore.collection('test').add({message:messageWrite});
-    const people = firestore.collection('test').valueChanges({ idField: 'id' }) as Observable<{ message: string; id: string; }[]>;
+    firestore.collection('test').add({message: messageWrite});
+    const people = firestore.collection('test').valueChanges({idField: 'id'}) as Observable<{ message: string; id: string; }[]>;
     // TODO(michaelsimpson): find a better way to typecast res
     /* eslint-disable  @typescript-eslint/no-explicit-any */
     people.pipe(take(1)).subscribe((res)=>{
@@ -43,5 +43,5 @@ describe('AppComponent', () => {
       expect(messageWrite === messageRead).toBe(true);
       done();
     });
-  })
+  });
 });
