@@ -19,10 +19,12 @@ import {AppRoutingModule} from './app-routing.module';
 import {SubRouterModule} from './sub-router/sub-router.module';
 
 import {MichaelsLibraryU92ac304Module} from 'michaels-library-u92ac304';
+import { ResumeComponent } from './resume/resume.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    ResumeComponent,
   ],
   imports: [
     BrowserModule,
