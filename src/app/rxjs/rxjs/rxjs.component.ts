@@ -12,6 +12,10 @@ export class RxjsComponent implements OnInit {
   observableOne$: Observable<object>;
 
   constructor(public nasa: NasaService) {
+    window.addEventListener('message', function(event) {
+        (event.source as WindowProxy)?.postMessage(document.getElementById('marsWeather')?.innerText, event.origin)
+    },false);
+
     // flattening joining study:
     const endpoints = [
       'https://api.nasa.gov/planetary/apod?start_date=2020-04-11&end_date=2020-04-12&api_key='+API_KEY,
