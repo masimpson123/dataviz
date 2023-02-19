@@ -9,6 +9,8 @@ import {AngularComponent} from 'src/app/angular/angular/angular.component';
 import {NasaComponent} from 'src/app/nasa/nasa/nasa.component';
 import {DashboardComponent} from 'src/app/dashboard/dashboard/dashboard.component';
 import {ResumeComponent} from 'src/app/resume/resume.component';
+import {NonBlockingAsynchronousProgrammingComponent} from 'src/app/non-blocking-asynchronous-programming/non-blocking-asynchronous-programming.component';
+import {CrossOriginCommunicationComponent} from 'src/app/cross-origin-communication/cross-origin-communication.component';
 
 const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent},
@@ -18,6 +20,8 @@ const routes: Routes = [
   // it seems the module must be lazy loaded for the sub router to behave as intended
   {path: 'root', loadChildren: () => import('./sub-router/sub-router.module').then((m) => m.SubRouterModule)},
   {path: 'resume', component: ResumeComponent},
+  {path: 'non-blocking-async', component: NonBlockingAsynchronousProgrammingComponent},
+  {path: 'cross-origin-communication', component: CrossOriginCommunicationComponent},
   {path: '**', component: DashboardComponent},
 ];
 
