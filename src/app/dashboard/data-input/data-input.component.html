@@ -32,7 +32,7 @@
   <button (click)="loadFirebaseStore()" mat-raised-button color="accent">Load Firebase Store</button>
   <br>
   <br>
-  <mat-card *ngIf="people.size">
+  <mat-card *ngIf="people?.size">
   <mat-list dense>
     <div mat-subheader>PEOPLE</div>
     <mat-list-item *ngFor="let person of people | keyvalue">

@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import * as actions from '../store/michael-io-app.actions';
+import { MichaelIOState } from '../store/michael-io-app.reducer';
 import {Actions, createEffect, ofType, concatLatestFrom} from '@ngrx/effects';
 import {tap, map, mergeMap, switchMap, catchError} from 'rxjs/operators';
 import {of} from 'rxjs';
@@ -12,7 +13,7 @@ export class PersonDataIntegrityEffects {
   constructor(
     private actions$: Actions,
     private friendValidator:FriendValidatorService,
-    private store: Store<{ people: Map<string, Person> }>,
+    private store: Store<{state: MichaelIOState}>,
   ) {}
 
   // TODO(michaelsimpson): add error handling
@@ -21,24 +22,24 @@ export class PersonDataIntegrityEffects {
   personDataIntegrity$ = createEffect(() => this.actions$.pipe(
       ofType(actions.addPersonProcessing),
       switchMap((action) => this.friendValidator.nullCheck(action.person).pipe(
-          concatLatestFrom(() => this.store.select('people')),
-          mergeMap(([person, people]) => {
+          concatLatestFrom(() => this.store),
+          mergeMap(([person, store]) => {
             // ensure duplicates are not input into the NgRx Store
-            people.forEach((value: Person, key:string) => {
+            store.state.people.forEach((value: Person, key:string) => {
               if (person.name === value.name) {
                 throw new Error('NO DUPLICATE ENTRIES (' + person.name + ')');
               }
             });
             // ensure friendship links are mutual in NgRx store (ie no Firestore)
             for (const friend of person.friends) {
-              if (people.has(friend)) {
-                const friendData = people.get(friend)!;
+              if (store.state.people.has(friend)) {
+                const friendData = store.state.people.get(friend)!;
                 if (!friendData.friends.includes(person.name)) {
                   this.store.dispatch(actions.addFriend({person: person.name, friend: friendData}));
                 }
               }
             }
-            people.forEach((value: Person, key:string) => {
+            store.state.people.forEach((value: Person, key:string) => {
               for (const friend of value.friends) {
                 if (friend === person.name && !person.friends.includes(value.name)) {
                   person.addFriend(value.name);

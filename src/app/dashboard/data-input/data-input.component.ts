@@ -5,6 +5,7 @@ import {addPersonProcessing, reset} from '../../store/michael-io-app.actions';
 import {Person} from '../../models/Person';
 import {FormGroup, FormControl, FormBuilder, FormArray} from '@angular/forms';
 import {FirebaseService} from '../../services/firebase.service';
+import { MichaelIOState } from '../../store/michael-io-app.reducer';
 
 @Component({
   selector: 'app-data-input',
@@ -12,7 +13,6 @@ import {FirebaseService} from '../../services/firebase.service';
   styleUrls: ['./data-input.component.css'],
 })
 export class DataInputComponent {
-  people$: Observable<Map<string, Person>>;
   people: Map<string, Person> = new Map();
   // TODO(michaelsimpson): properly validate this data
   personForm = new FormGroup({
@@ -37,15 +37,15 @@ export class DataInputComponent {
   }
 
   constructor(
-    private store: Store<{ people: Map<string, Person> }>,
+    private store: Store<{state: MichaelIOState}>,
     private fb: FormBuilder,
     private firebaseService: FirebaseService,
   ) {
     // TODO(michaelsimpson): can this be replaced with an async pipe
     // in the template?
-    this.people$ = store.select('people');
-    this.people$.subscribe((res)=>{
-      this.people=res;
+    console.log(store);
+    store.subscribe((res) => {
+      this.people = res.state.people;
     });
   }
 

@@ -20,7 +20,7 @@ import {SubRouterModule} from './sub-router/sub-router.module';
 
 import {MichaelsLibraryU92ac304Module} from 'michaels-library-u92ac304';
 import { ResumeComponent } from './resume/resume.component';
-import { NonBlockingAsynchronousProgrammingComponent } from './non-blocking-asynchronous-programming/non-blocking-asynchronous-programming.component';
+import { NonBlockingAsynchronousProgrammingComponent, NonBlockingAsynchronousProgrammingEffect } from './non-blocking-asynchronous-programming/non-blocking-asynchronous-programming.component';
 import { CrossOriginCommunicationComponent } from './cross-origin-communication/cross-origin-communication.component';
 
 @NgModule({
@@ -33,10 +33,10 @@ import { CrossOriginCommunicationComponent } from './cross-origin-communication/
   imports: [
     BrowserModule,
     DashboardModule,
-    StoreModule.forRoot({people: michaelIOAppReducer}),
+    StoreModule.forRoot({state: michaelIOAppReducer}),
     // BrowserAnimationsModule,
     NoopAnimationsModule,
-    EffectsModule.forRoot([PersonDataIntegrityEffects]),
+    EffectsModule.forRoot([PersonDataIntegrityEffects, NonBlockingAsynchronousProgrammingEffect]),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
     NasaModule,
