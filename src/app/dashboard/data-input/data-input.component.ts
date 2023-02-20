@@ -43,7 +43,6 @@ export class DataInputComponent {
   ) {
     // TODO(michaelsimpson): can this be replaced with an async pipe
     // in the template?
-    console.log(store);
     store.subscribe((res) => {
       this.people = res.state.people;
     });
