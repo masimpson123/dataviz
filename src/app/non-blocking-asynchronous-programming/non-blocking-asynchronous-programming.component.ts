@@ -17,12 +17,21 @@ import { fetchPeople } from '../store/michael-io-app.actions';
 })
 export class NonBlockingAsynchronousProgrammingComponent implements OnInit {
   metrics$ = this.store.pipe(map(state => state.state.accumulatedMetrics));
+  asyncPeople$ = this.store.pipe(map(state => state.state.asyncPeople));
 
   constructor(private store: Store<{state: MichaelIOState}>) {
-    this.store.dispatch(fetchPeople({ metrics: { total: 0, senior: 0 }}));
   }
 
   ngOnInit(): void {
+  }
+
+  start() {
+    end = false;
+    this.store.dispatch(fetchPeople({ people: [] }));
+  }
+
+  stop() {
+    end = true;
   }
 
 }
@@ -36,14 +45,13 @@ export class NonBlockingAsynchronousProgrammingEffect {
   fetchRecords$ = createEffect(() =>
     this.actions$.pipe(
       ofType('[ASYNC] FETCH PEOPLE'),
-      delay(1000),
+      // delay(50),
       mergeMap(() => this.httpService.get(
-        'https://endpoint-one-2-u7qjhl7iia-uc.a.run.app/people?crowd=500')),
-      map((people: any) => (people.reduce(
-        (acc:any, cur:any) => ({
-          total: acc.total + 1,
-          senior: Number(cur.age) > 70 ? Number(cur.age) + 1 : Number(cur.age)
-        }),
-        { total: 0, senior: 0 }))),
-      map(metrics => ({ type: '[ASYNC] FETCH PEOPLE', metrics }))));
+        'https://endpoint-one-2-u7qjhl7iia-uc.a.run.app/people?crowd=1000')),
+      map(people =>
+        (end) ?
+        ({ type: '[ASYNC] END' }) :
+        ({ type: '[ASYNC] FETCH PEOPLE', people }))));
 }
+
+let end = false;

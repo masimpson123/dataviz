@@ -1,1 +1,14 @@
+The analyzed data is pulled from
+https://endpoint-one-2-u7qjhl7iia-uc.a.run.app/people
+<br>
+<br>
+<button mat-raised-button color="primary" (click)="start()">START</button>
+<br>
+<br>
+<button mat-raised-button color="warn" (click)="stop()">STOP</button>
+<br>
+<br>
 {{ metrics$ | async | json }}
+<br>
+<br>
+{{ asyncPeople$ | async | json }}
