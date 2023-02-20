@@ -17,11 +17,15 @@ import {AngularModule} from 'src/app/angular/angular.module';
 import {HttpClientModule} from '@angular/common/http';
 import {AppRoutingModule} from './app-routing.module';
 import {SubRouterModule} from './sub-router/sub-router.module';
-
+import {MatButtonModule} from '@angular/material/button';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import {MichaelsLibraryU92ac304Module} from 'michaels-library-u92ac304';
 import { ResumeComponent } from './resume/resume.component';
 import { NonBlockingAsynchronousProgrammingComponent, NonBlockingAsynchronousProgrammingEffect } from './non-blocking-asynchronous-programming/non-blocking-asynchronous-programming.component';
 import { CrossOriginCommunicationComponent } from './cross-origin-communication/cross-origin-communication.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -47,8 +51,13 @@ import { CrossOriginCommunicationComponent } from './cross-origin-communication/
     SubRouterModule,
     AppRoutingModule,
     MichaelsLibraryU92ac304Module,
+    MatButtonModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
-  providers: [],
+  providers: [MatDatepickerModule],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

@@ -2,10 +2,19 @@ The analyzed data is pulled from
 https://endpoint-one-2-u7qjhl7iia-uc.a.run.app/people
 <br>
 <br>
-<button mat-raised-button color="primary" (click)="start()">START</button>
+<button mat-raised-button color="accent" (click)="start()">START</button>
 <br>
 <br>
-<button mat-raised-button color="warn" (click)="stop()">STOP</button>
+<button mat-raised-button color="accent" (click)="stop()">STOP</button>
+<br>
+<br>
+<mat-form-field appearance="fill">
+  <mat-label>Choose a date</mat-label>
+  <input matInput [matDatepicker]="picker">
+  <mat-hint>MM/DD/YYYY</mat-hint>
+  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
 <br>
 <br>
 {{ metrics$ | async | json }}
