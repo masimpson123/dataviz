@@ -2,7 +2,7 @@
   "targets": {
     "michael-simpson": {
       "hosting": {
-        "friend-logger": [
+        "michael-io-app": [
           "michael-simpson"
         ]
       }

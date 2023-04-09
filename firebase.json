@@ -1,8 +1,8 @@
 {
   "hosting": [
     {
-      "target": "friend-logger",
-      "public": "dist/friend-logger",
+      "target": "michael-io-app",
+      "public": "dist/michael-io-app",
       "ignore": [
         "**/.*"
       ],

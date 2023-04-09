@@ -6,7 +6,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "friend-logger": {
+    "michael-io-app": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -26,7 +26,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/friend-logger",
+            "outputPath": "dist/michael-io-app",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -78,10 +78,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "friend-logger:build:production"
+              "browserTarget": "michael-io-app:build:production"
             },
             "development": {
-              "browserTarget": "friend-logger:build:development"
+              "browserTarget": "michael-io-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -89,7 +89,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "friend-logger:build"
+            "browserTarget": "michael-io-app:build"
           }
         },
         "test": {
@@ -148,5 +148,5 @@
       }
     }
   },
-  "defaultProject": "friend-logger"
+  "defaultProject": "michael-io-app"
 }
