@@ -1,0 +1,49 @@
+<h3 *ngIf="user">
+  HELLO USER {{ user.uid }}!
+  <div *ngIf="user.photoURL"
+    style="height:100px; width:100px; border-radius:50%; overflow:hidden">
+    <img style="width:100%" src={{user.photoURL}} referrerpolicy=“no-referrer”/>
+  </div>
+</h3>
+
+<input type="file" #fileUpload [(ngModel)]="uploadedFile" style="display:none"
+  (change)="uploadFile($event)"/>
+<button mat-raised-button color="accent" [disabled]="uploading" style="margin:10px"
+  (click)="fileUpload.click()">
+  <span *ngIf="!uploading">
+    UPLOAD PROFILE IMAGE
+  </span>
+  <span *ngIf="uploading">
+    UPLOADING
+    <mat-icon style="vertical-align:middle">
+      <mat-spinner color="warn" diameter="20"></mat-spinner>
+    </mat-icon>
+  </span>
+</button>
+
+<hr>
+
+<mat-form-field style="margin:10px">
+  <mat-label>Email</mat-label>
+  <input type="text" matInput placeholder="Name" [(ngModel)]="email">
+</mat-form-field>
+
+<mat-form-field style="margin:10px">
+  <mat-label>Password:</mat-label>
+  <input type="text" matInput placeholder="Name" [(ngModel)]="password">
+</mat-form-field>
+
+<div>
+  <button mat-raised-button color="accent" style="margin:10px"
+    (click)="createUser()">CREATE USER</button>
+
+  <button mat-raised-button color="accent" style="margin:10px"
+    (click)="signIn()">SIGN IN</button>
+
+  <button mat-raised-button color="accent" style="margin:10px"
+    (click)="signOut()">SIGN OUT</button>
+</div>
+
+<hr>
+
+Secure file system...

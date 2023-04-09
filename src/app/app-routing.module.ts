@@ -10,6 +10,7 @@ import {NasaComponent} from 'src/app/nasa/nasa/nasa.component';
 import {DashboardComponent} from 'src/app/dashboard/dashboard/dashboard.component';
 import {ResumeComponent} from 'src/app/resume/resume.component';
 import {NonBlockingAsynchronousProgrammingComponent} from 'src/app/non-blocking-asynchronous-programming/non-blocking-asynchronous-programming.component';
+import {UserManagementComponent} from 'src/app/user-management/user-management.component';
 import {CrossOriginCommunicationComponent} from 'src/app/cross-origin-communication/cross-origin-communication.component';
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path: 'resume', component: ResumeComponent},
   {path: 'non-blocking-async', component: NonBlockingAsynchronousProgrammingComponent},
   {path: 'cross-origin-communication', component: CrossOriginCommunicationComponent},
+  {path: 'user-management', component: UserManagementComponent},
   {path: '**', component: DashboardComponent},
 ];
 

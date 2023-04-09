@@ -4,12 +4,13 @@ import {AppComponent} from './app.component';
 import {DashboardModule} from './dashboard/dashboard.module';
 import {StoreModule} from '@ngrx/store';
 import {michaelIOAppReducer} from './store/michael-io-app.reducer';
-// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+//import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {EffectsModule} from '@ngrx/effects';
 import {PersonDataIntegrityEffects} from './effects/person-data-integrity.effects';
 import {AngularFireModule} from '@angular/fire';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {AngularFireAuthModule} from '@angular/fire/auth';
 import {firebaseConfig} from 'src/environments/environment';
 import {NasaModule} from 'src/app/nasa/nasa.module';
 import {RxjsModule} from 'src/app/rxjs/rxjs.module';
@@ -19,13 +20,17 @@ import {AppRoutingModule} from './app-routing.module';
 import {SubRouterModule} from './sub-router/sub-router.module';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import {MatNativeDateModule} from '@angular/material/core';
 import {MichaelsLibraryU92ac304Module} from 'michaels-library-u92ac304';
-import { ResumeComponent } from './resume/resume.component';
-import { NonBlockingAsynchronousProgrammingComponent, NonBlockingAsynchronousProgrammingEffect } from './non-blocking-asynchronous-programming/non-blocking-asynchronous-programming.component';
-import { CrossOriginCommunicationComponent } from './cross-origin-communication/cross-origin-communication.component';
+import {ResumeComponent} from './resume/resume.component';
+import {NonBlockingAsynchronousProgrammingComponent, NonBlockingAsynchronousProgrammingEffect} from './non-blocking-asynchronous-programming/non-blocking-asynchronous-programming.component';
+import {CrossOriginCommunicationComponent} from './cross-origin-communication/cross-origin-communication.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+import {MatInputModule} from '@angular/material/input';
+import {UserManagementComponent} from './user-management/user-management.component';
+import {FormsModule} from '@angular/forms';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -33,16 +38,18 @@ import { MatInputModule } from '@angular/material/input';
     ResumeComponent,
     NonBlockingAsynchronousProgrammingComponent,
     CrossOriginCommunicationComponent,
+    UserManagementComponent,
   ],
   imports: [
     BrowserModule,
     DashboardModule,
     StoreModule.forRoot({state: michaelIOAppReducer}),
-    // BrowserAnimationsModule,
-    NoopAnimationsModule,
+    BrowserAnimationsModule,
+    //NoopAnimationsModule,
     EffectsModule.forRoot([PersonDataIntegrityEffects, NonBlockingAsynchronousProgrammingEffect]),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
+    AngularFireAuthModule,
     NasaModule,
     RxjsModule,
     AngularModule,
@@ -55,7 +62,10 @@ import { MatInputModule } from '@angular/material/input';
     MatDatepickerModule,
     MatNativeDateModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    FormsModule,
+    MatProgressSpinnerModule,
+    MatIconModule
   ],
   providers: [MatDatepickerModule],
   bootstrap: [AppComponent],

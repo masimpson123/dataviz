@@ -5,7 +5,7 @@ import {addPersonProcessing, reset} from '../../store/michael-io-app.actions';
 import {Person} from '../../models/Person';
 import {FormGroup, FormControl, FormBuilder, FormArray} from '@angular/forms';
 import {FirebaseService} from '../../services/firebase.service';
-import { MichaelIOState } from '../../store/michael-io-app.reducer';
+import {MichaelIOState} from '../../store/michael-io-app.reducer';
 
 @Component({
   selector: 'app-data-input',

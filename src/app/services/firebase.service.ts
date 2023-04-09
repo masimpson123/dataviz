@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
+import {AngularFireStorage} from '@angular/fire/storage';
 import {Observable} from 'rxjs';
 import {take} from 'rxjs/operators';
 import {Person} from '../models/Person';
@@ -14,6 +15,7 @@ export class FirebaseService {
   people = this.firestore.collection('people').valueChanges({idField: 'id'}) as Observable<FirebasePerson[]>;
   constructor(
     private firestore: AngularFirestore,
+    private fireStorage: AngularFireStorage,
     private store: Store<{ people: Map<string, Person> }>,
   ) {}
   write(person:Person) {
@@ -38,5 +40,10 @@ export class FirebaseService {
         this.store.dispatch(addPersonProcessing({person: newPerson}));
       }
     });
+  }
+  upload(path: string, file: File): Promise<Observable<string>> {
+    return this.fireStorage.upload(path, file).then(() => {
+      console.log('SUCCESS');
+    }).then(() => this.fireStorage.ref(path).getDownloadURL());
   }
 }
