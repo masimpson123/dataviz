@@ -1,93 +1,70 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { User } from '@firebase/auth-types';
 import { FirebaseService } from '../services/firebase.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-management',
   templateUrl: './user-management.component.html',
   styleUrls: ['./user-management.component.css']
 })
-export class UserManagementComponent implements OnInit {
-
-  // TODO:
-  // move AngularFireAuth to FirebaseService
-  // implement secure file service
-
-
+export class UserManagementComponent implements OnInit, OnDestroy {
   email = '';
   password = '';
   uploadedFile = null;
   uploading = false;
-
   user: User|null = null;
 
+  destroy$ = new Subject();
+
+  // CODE REVIEW
+  // MANUAL VALIDATION
+
   constructor(
-    private fireAuth: AngularFireAuth,
-    private cd: ChangeDetectorRef,
-    private firebaseService: FirebaseService) {
-    this.fireAuth.onAuthStateChanged((user) => {
-      if (user) {
-        console.log(user);
-        console.log(user.photoURL);
-        console.log(user.uid);
-        console.log(user.email);
-        console.log(user.emailVerified);
-        this.user = user;
-        this.cd.detectChanges();
-      } else {
-        console.log("NO USER");
-      }
+    private firebaseService: FirebaseService,
+    private cd: ChangeDetectorRef) {
+    this.firebaseService.user.pipe(takeUntil(this.destroy$)).subscribe(user => {
+      this.user = user;
+      this.cd.detectChanges();
     });
   }
 
   ngOnInit(): void {
   }
 
+  ngOnDestroy() {
+    this.destroy$.next();
+  }
+
+
   createUser() {
-    this.fireAuth.createUserWithEmailAndPassword(
-    this.email,this.password)
-    .then(() => {
-      console.log("user created!");
-    })
-    .catch((error) => {
-      alert(error);
-    });
+    this.firebaseService.createUser(this.email,this.password);
   }
 
   signIn() {
-    this.fireAuth.signInWithEmailAndPassword(
-    this.email,this.password)
-    .then(() => {
-      console.log("user signed in!");
-    })
-    .catch((error) => {
-      alert(error);
-    });
+    this.firebaseService.signIn(this.email,this.password);
   }
 
   signOut() {
-    this.fireAuth.signOut().then(() => {
-      console.log("Sign out!");
-      this.user = null;
-    }).catch((error) => {
-      alert(error);
-    });
+    this.firebaseService.signOut();
   }
 
   uploadFile(event: Event) {
     this.uploading = true;
     const files = (event.srcElement as HTMLInputElement)?.files;
-    if(this.user && this.user.uid && files && files.length) {
-      this.firebaseService.upload(this.user.uid + '/profile', files[0]).then(
-        (photoURLRequest) => photoURLRequest.subscribe(
-        photoURL => {
-          this.uploading = false;
-          this.user!.updateProfile({
-            photoURL
-          });
-        }
-      ));
-    }
+    this.firebaseService.user.subscribe(user => {
+      if(user && user.uid && files && files.length) {
+        this.firebaseService.upload(user.uid + '/profile', files[0]).then(
+          (photoURLRequest) => photoURLRequest.subscribe(
+          photoURL => {
+            this.uploading = false;
+            user!.updateProfile({
+              photoURL
+            });
+          }
+        ));
+      }
+    });
   }
 }

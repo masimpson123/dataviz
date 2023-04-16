@@ -1,9 +1,9 @@
-<span *ngIf="user">
+<span *ngIf="user?.uid">
   <h3>
-    HELLO USER {{ user.uid }}!
-    <div *ngIf="user.photoURL"
+    HELLO USER {{ user!.uid }}!
+    <div *ngIf="user?.photoURL"
       style="height:100px; width:100px; border-radius:50%; overflow:hidden">
-      <img style="width:100%" src={{user.photoURL}} referrerpolicy=“no-referrer”/>
+      <img style="width:100%" src={{user!.photoURL}} referrerpolicy=“no-referrer”/>
     </div>
   </h3>
 
@@ -47,5 +47,3 @@
 </div>
 
 <hr>
-
-Secure file system...
