@@ -31,6 +31,9 @@ import {UserManagementComponent} from './user-management/user-management.compone
 import {FormsModule} from '@angular/forms';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatIconModule} from '@angular/material/icon';
+import {ThreeJsComponent} from './three-js/three-js.component';
+import {MatSliderModule} from '@angular/material/slider';
+
 
 @NgModule({
   declarations: [
@@ -39,6 +42,7 @@ import {MatIconModule} from '@angular/material/icon';
     NonBlockingAsynchronousProgrammingComponent,
     CrossOriginCommunicationComponent,
     UserManagementComponent,
+    ThreeJsComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,7 +69,8 @@ import {MatIconModule} from '@angular/material/icon';
     MatInputModule,
     FormsModule,
     MatProgressSpinnerModule,
-    MatIconModule
+    MatIconModule,
+    MatSliderModule
   ],
   providers: [MatDatepickerModule],
   bootstrap: [AppComponent],

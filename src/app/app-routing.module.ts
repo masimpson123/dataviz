@@ -11,6 +11,7 @@ import {DashboardComponent} from 'src/app/dashboard/dashboard/dashboard.componen
 import {ResumeComponent} from 'src/app/resume/resume.component';
 import {NonBlockingAsynchronousProgrammingComponent} from 'src/app/non-blocking-asynchronous-programming/non-blocking-asynchronous-programming.component';
 import {UserManagementComponent} from 'src/app/user-management/user-management.component';
+import {ThreeJsComponent} from 'src/app/three-js/three-js.component';
 import {CrossOriginCommunicationComponent} from 'src/app/cross-origin-communication/cross-origin-communication.component';
 
 const routes: Routes = [
@@ -24,6 +25,7 @@ const routes: Routes = [
   {path: 'non-blocking-async', component: NonBlockingAsynchronousProgrammingComponent},
   {path: 'cross-origin-communication', component: CrossOriginCommunicationComponent},
   {path: 'user-management', component: UserManagementComponent},
+  {path: 'three-js', component: ThreeJsComponent},
   {path: '**', component: DashboardComponent},
 ];
 

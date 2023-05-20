@@ -1,0 +1,17 @@
+<mat-slider
+  #mySlider
+  (input)="rotationUpdate(mySlider.value)"
+  style="position:absolute; left: 30px; top: 30px"
+  value="60">
+  <input matSliderThumb>
+</mat-slider>
+
+<mat-slider
+  #myZoomSlider
+  (input)="zoomUpdate(myZoomSlider.value)"
+  style="position:absolute; left: 30px; top: 60px"
+  value="75">
+  <input matSliderThumb>
+</mat-slider>
+
+<canvas #canvas id="canvas" style="height:100%; width: 100%;"></canvas>
