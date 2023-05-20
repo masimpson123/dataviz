@@ -13,7 +13,7 @@ export class ThreeJsComponent implements AfterViewInit {
   @Input() public rotationSpeedX: number = 0.05;
   @Input() public rotationSpeedY: number = 0.01;
   @Input() public size: number = 200;
-  @Input() public texture: string = "/assets/texture.avif";
+  // @Input() public texture: string = "/assets/texture.avif";
 
   @Input() public fieldOfView: number = 1;
   @Input('nearClipping') public nearClippingPlane: number = 1;
@@ -26,14 +26,16 @@ export class ThreeJsComponent implements AfterViewInit {
   private get canvas():HTMLCanvasElement {
     return this.canvasRef?.nativeElement;
   }
-  private loader = new THREE.TextureLoader();
+  // private loader = new THREE.TextureLoader();
   private geometry = new THREE.BoxGeometry(1,1,1);
-  private material = new THREE.MeshBasicMaterial({
-    map: this.loader.load(this.texture)});
+  private material = new THREE.MeshPhongMaterial({
+    color: 0x49796B});
   private cube: THREE.Mesh = new THREE.Mesh(this.geometry, this.material);
   private edges = new THREE.EdgesGeometry(this.geometry);
-  private lines = new THREE.LineSegments(
-    this.edges, new THREE.LineBasicMaterial({color: 0x000000}));
+  // private lines = new THREE.LineSegments(
+  //   this.edges, new THREE.LineBasicMaterial({color: 0x708090}));
+  private light = new THREE.DirectionalLight(0xFFFFFF, .8);
+  private fillLight = new THREE.AmbientLight(0xFFFFFF, .4);
   private renderer!: THREE.WebGLRenderer;
   private scene!: THREE.Scene;
 
@@ -49,7 +51,10 @@ export class ThreeJsComponent implements AfterViewInit {
     this.scene = new THREE.Scene();
     this.scene.background = new THREE.Color(0x708090);
     this.scene.add(this.cube);
-    this.scene.add(this.lines);
+    // this.scene.add(this.lines);
+    this.light.position.set(2,2,2);
+    this.scene.add(this.light);
+    this.scene.add(this.fillLight);
     // Camera
     let aspectRatio = this.getAspectRatio();
     this.camera = new THREE.PerspectiveCamera(
@@ -68,8 +73,8 @@ export class ThreeJsComponent implements AfterViewInit {
   private animateCube() {
     this.cube.rotation.x = this.desiredRotationX;
     this.cube.rotation.y += this.rotationSpeedY;
-    this.lines.rotation.x = this.desiredRotationX;
-    this.lines.rotation.y += this.rotationSpeedY;
+    //this.lines.rotation.x = this.desiredRotationX;
+    //this.lines.rotation.y += this.rotationSpeedY;
     this.camera.position.z = this.cameraZ;
   }
 
