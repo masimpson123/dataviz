@@ -10,7 +10,7 @@ export class ResumeComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    window.location.replace("http://michaelsimpson.io/resume.pdf");
+    window.open("/assets/resume.pdf", "_self");
   }
 
 }

@@ -34,7 +34,7 @@ export class ThreeJsComponent implements AfterViewInit {
   private edges = new THREE.EdgesGeometry(this.geometry);
   // private lines = new THREE.LineSegments(
   //   this.edges, new THREE.LineBasicMaterial({color: 0x708090}));
-  private light = new THREE.DirectionalLight(0xFFFFFF, .8);
+  private light = new THREE.DirectionalLight(0xFFFFFF, 1);
   private fillLight = new THREE.AmbientLight(0xFFFFFF, .4);
   private renderer!: THREE.WebGLRenderer;
   private scene!: THREE.Scene;
