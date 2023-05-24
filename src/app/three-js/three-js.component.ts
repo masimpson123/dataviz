@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Input, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input, AfterViewInit, HostListener } from '@angular/core';
 import * as THREE from "three";
 
 @Component({
@@ -22,24 +22,66 @@ export class ThreeJsComponent implements AfterViewInit {
   desiredRotationX = 3.7699;
   cameraZ = 250;
 
+  private readonly MINT = 0x49796B;
+  private readonly ORANGE = 0xFF7F50;
+
   private camera!: THREE.PerspectiveCamera;
   private get canvas():HTMLCanvasElement {
     return this.canvasRef?.nativeElement;
   }
   // private loader = new THREE.TextureLoader();
-  private geometry = new THREE.BoxGeometry(1,1,1);
-  private material = new THREE.MeshPhongMaterial({
-    color: 0x49796B});
-  private cube: THREE.Mesh = new THREE.Mesh(this.geometry, this.material);
+  private geometry = new THREE.BoxGeometry(1,1,1).toNonIndexed();
+  private material1 = new THREE.MeshPhongMaterial({
+  color: this.MINT});
+  private material2 = new THREE.MeshPhongMaterial({
+  color: this.MINT});
+  private material3 = new THREE.MeshPhongMaterial({
+  color: this.MINT});
+  private material4 = new THREE.MeshPhongMaterial({
+  color: this.MINT});
+  private material5 = new THREE.MeshPhongMaterial({
+  color: this.MINT});
+  private material6 = new THREE.MeshPhongMaterial({
+  color: this.MINT});
+  private cube: THREE.Mesh = new THREE.Mesh(this.geometry, [
+    this.material1,
+    this.material2,
+    this.material3,
+    this.material4,
+    this.material5,
+    this.material6]);
   private edges = new THREE.EdgesGeometry(this.geometry);
-  // private lines = new THREE.LineSegments(
-  //   this.edges, new THREE.LineBasicMaterial({color: 0x708090}));
   private light = new THREE.DirectionalLight(0xFFFFFF, 1);
   private fillLight = new THREE.AmbientLight(0xFFFFFF, .4);
   private renderer!: THREE.WebGLRenderer;
   private scene!: THREE.Scene;
 
-  constructor() { }
+  private raycaster: THREE.Raycaster;
+  private mouse: THREE.Vector2;
+
+  @HostListener('document:click', ['$event'])
+  onKeyUp(event:MouseEvent) {
+    event.preventDefault();
+    this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    this.raycaster.setFromCamera(this.mouse, this.camera);
+    const intersects = this.raycaster.intersectObjects(this.scene.children);
+    if (intersects.length) {
+      const intersection = intersects[0];
+      const faceIndex = intersection.face?.materialIndex;
+      const object = intersection.object as any;
+      if (faceIndex || faceIndex === 0) {
+        const color = object.material[faceIndex].color;
+        object.material[faceIndex].color.set((color.r > color.g) ? this.MINT : this.ORANGE);
+        object.material[faceIndex].colorsNeedUpdate = true;
+      }
+    }
+  }
+
+  constructor() {
+    this.mouse = new THREE.Vector2();
+    this.raycaster = new THREE.Raycaster();
+  }
 
   ngAfterViewInit(): void {
     this.createScene();
