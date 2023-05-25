@@ -58,34 +58,45 @@ export class ThreeJsComponent implements AfterViewInit {
 
   private raycaster: THREE.Raycaster;
   private mouse: THREE.Vector2;
+  private mouseCoordinates: number[];
+  private highlightedObject: any;
 
-  @HostListener('document:click', ['$event'])
-  onKeyUp(event:MouseEvent) {
-    event.preventDefault();
-    this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-    this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-    this.raycaster.setFromCamera(this.mouse, this.camera);
-    const intersects = this.raycaster.intersectObjects(this.scene.children);
-    if (intersects.length) {
-      const intersection = intersects[0];
-      const faceIndex = intersection.face?.materialIndex;
-      const object = intersection.object as any;
-      if (faceIndex || faceIndex === 0) {
-        const color = object.material[faceIndex].color;
-        object.material[faceIndex].color.set((color.r > color.g) ? this.MINT : this.ORANGE);
-        object.material[faceIndex].colorsNeedUpdate = true;
-      }
-    }
+  @HostListener('document:mousemove', ['$event'])
+  move(event:MouseEvent) {
+    this.mouseCoordinates = [event.clientX,event.clientY];
   }
 
   constructor() {
     this.mouse = new THREE.Vector2();
     this.raycaster = new THREE.Raycaster();
+    this.mouseCoordinates = [0,0];
   }
 
   ngAfterViewInit(): void {
     this.createScene();
     this.startRenderingLoop();
+  }
+
+  private highlight(coordinates: number[]) {
+    this.mouse.x = (coordinates[0] / window.innerWidth) * 2 - 1;
+    this.mouse.y = -(coordinates[1] / window.innerHeight) * 2 + 1.06;
+    this.raycaster.setFromCamera(this.mouse, this.camera);
+    const intersects = this.raycaster.intersectObjects(this.scene.children);
+    let faceIndex: number|undefined = undefined;
+    if (intersects.length) {
+      const intersection = intersects[0];
+      faceIndex = intersection.face?.materialIndex;
+      this.highlightedObject = intersection.object as any;
+    }
+    if (this.highlightedObject) {
+      this.highlightedObject.material.forEach((value: any, index: number) => {
+        value.color.set((index === faceIndex) ? this.ORANGE : this.MINT);
+        value.colorsNeedUpdate = true;
+      });
+    }
+    if (!intersects.length) {
+      this.highlightedObject = null;
+    }
   }
 
   private createScene() {
@@ -130,6 +141,7 @@ export class ThreeJsComponent implements AfterViewInit {
       requestAnimationFrame(render);
       component.animateCube();
       component.renderer.render(component.scene, component.camera);
+      component.highlight(component.mouseCoordinates);
     }());
   }
 
