@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 
 @Component({
   selector: 'app-angular',
@@ -7,6 +7,8 @@ import {Component, OnInit} from '@angular/core';
 })
 export class AngularComponent implements OnInit {
   constructor() { }
+
+  @Input() templateTypeScriptAnalysisOne = 'one';
 
   ngOnInit(): void {
   }

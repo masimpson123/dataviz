@@ -34,7 +34,6 @@ import {MatIconModule} from '@angular/material/icon';
 import {ThreeJsComponent} from './three-js/three-js.component';
 import {MatSliderModule} from '@angular/material/slider';
 
-
 @NgModule({
   declarations: [
     AppComponent,

@@ -51,6 +51,8 @@ export class ThreeJsComponent implements AfterViewInit {
     this.material5,
     this.material6]);
   private edges = new THREE.EdgesGeometry(this.geometry);
+  private wireframe = new THREE.WireframeGeometry( this.geometry );
+  private lines = new THREE.LineSegments(this.wireframe, new THREE.LineBasicMaterial( { color: 0xffffff, linewidth: 100, linecap: 'round', linejoin:  'round' } ) );
   private light = new THREE.DirectionalLight(0xFFFFFF, 1);
   private fillLight = new THREE.AmbientLight(0xFFFFFF, .4);
   private renderer!: THREE.WebGLRenderer;
@@ -67,6 +69,7 @@ export class ThreeJsComponent implements AfterViewInit {
   }
 
   constructor() {
+    this.lines.material.linewidth = 100;
     this.mouse = new THREE.Vector2();
     this.raycaster = new THREE.Raycaster();
     this.mouseCoordinates = [0,0];
@@ -104,7 +107,7 @@ export class ThreeJsComponent implements AfterViewInit {
     this.scene = new THREE.Scene();
     this.scene.background = new THREE.Color(0x708090);
     this.scene.add(this.cube);
-    // this.scene.add(this.lines);
+    this.scene.add(this.lines);
     this.light.position.set(2,2,2);
     this.scene.add(this.light);
     this.scene.add(this.fillLight);
@@ -126,8 +129,8 @@ export class ThreeJsComponent implements AfterViewInit {
   private animateCube() {
     this.cube.rotation.x = this.desiredRotationX;
     this.cube.rotation.y += this.rotationSpeedY;
-    //this.lines.rotation.x = this.desiredRotationX;
-    //this.lines.rotation.y += this.rotationSpeedY;
+    this.lines.rotation.x = this.desiredRotationX;
+    this.lines.rotation.y += this.rotationSpeedY;
     this.camera.position.z = this.cameraZ;
   }
 
