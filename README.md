@@ -3,6 +3,7 @@ ng serve
 
 console.cloud.google.com
 masimpson123@gmail.com
+msio-u7qjhl7iia-uc.a.run.app
 
 # BUILD IMAGE
 cd /Users/livingroom/Desktop/michael-io-app
