@@ -1,6 +1,22 @@
 cd /Users/livingroom/Desktop/michael-io-app
 ng serve
 
+console.cloud.google.com
+masimpson123@gmail.com
+
+# BUILD IMAGE
+cd /Users/livingroom/Desktop/michael-io-app
+open docker desktop or run the docker daemon some other way
+docker build --platform linux/amd64 -t msio .
+
+# UPLOAD TO GCP
+docker tag msio us-central1-docker.pkg.dev/endpoint-one/endpoint-one/msio:<mmddyy>
+docker push us-central1-docker.pkg.dev/endpoint-one/endpoint-one/msio:<mmddyy>
+
+! GitHub has excellent SSH documentation
+! brew upgrade google-cloud-sdk
+! https://medium.com/@larry_nguyen/how-to-deploy-angular-application-on-google-cloud-run-c6d472e07bd5
+
 # FriendLogger
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.2.
