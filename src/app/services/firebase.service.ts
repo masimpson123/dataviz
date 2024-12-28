@@ -1,21 +1,22 @@
 import {Injectable} from '@angular/core';
-import {AngularFirestore} from '@angular/fire/firestore';
-import {AngularFireStorage} from '@angular/fire/storage';
+import {AngularFirestore} from '@angular/fire/compat/firestore';
+import {AngularFireStorage} from '@angular/fire/compat/storage';
 import {Observable, ReplaySubject} from 'rxjs';
 import {take} from 'rxjs/operators';
 import {Person} from '../models/Person';
 import {addPersonProcessing} from '../store/michael-io-app.actions';
 import {Store} from '@ngrx/store';
 import {FirebasePerson} from '../models/models';
-import {AngularFireAuth} from '@angular/fire/auth';
-import {User} from '@firebase/auth-types';
+import {AngularFireAuth} from '@angular/fire/compat/auth';
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FirebaseService {
   people = this.firestore.collection('people').valueChanges({idField: 'id'}) as Observable<FirebasePerson[]>;
-  user: ReplaySubject<User|null> = new ReplaySubject(1);
+  user: ReplaySubject<firebase.User|null> = new ReplaySubject(1);
 
   constructor(
     private firestore: AngularFirestore,

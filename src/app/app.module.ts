@@ -8,9 +8,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {EffectsModule} from '@ngrx/effects';
 import {PersonDataIntegrityEffects} from './effects/person-data-integrity.effects';
-import {AngularFireModule} from '@angular/fire';
-import {AngularFirestoreModule} from '@angular/fire/firestore';
-import {AngularFireAuthModule} from '@angular/fire/auth';
+import {AngularFireModule} from '@angular/fire/compat';
+import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
+import {AngularFireAuthModule} from '@angular/fire/compat/auth';
+import {RouterModule} from '@angular/router';
 import {firebaseConfig} from 'src/environments/environment';
 import {NasaModule} from 'src/app/nasa/nasa.module';
 import {RxjsModule} from 'src/app/rxjs/rxjs.module';
@@ -44,6 +45,7 @@ import {MatSliderModule} from '@angular/material/slider';
     ThreeJsComponent,
   ],
   imports: [
+    RouterModule,
     BrowserModule,
     DashboardModule,
     StoreModule.forRoot({state: michaelIOAppReducer}),

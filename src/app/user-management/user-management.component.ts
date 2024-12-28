@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
-import { User } from '@firebase/auth-types';
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
 import { FirebaseService } from '../services/firebase.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -14,7 +15,7 @@ export class UserManagementComponent implements OnInit, OnDestroy {
   password = '';
   uploadedFile = null;
   uploading = false;
-  user: User|null = null;
+  user: firebase.User|null = null;
 
   destroy$ = new Subject();
 
