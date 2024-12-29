@@ -15,8 +15,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {EffectsModule} from '@ngrx/effects';
 import {PersonDataIntegrityEffects} from '../../effects/person-data-integrity.effects';
 import {FirebaseService} from '../../services/firebase.service';
-import {AngularFirestoreModule} from '@angular/fire/firestore';
-import {AngularFireModule} from '@angular/fire';
+import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
+import {AngularFireModule} from '@angular/fire/compat';
 import {firebaseConfig} from 'src/environments/environment';
 
 describe('DataInputComponent', () => {

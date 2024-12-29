@@ -5,8 +5,8 @@ import {michaelIOAppReducer} from '../../store/michael-io-app.reducer';
 import {StoreModule} from '@ngrx/store';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {FirebaseService} from '../../services/firebase.service';
-import {AngularFireModule} from '@angular/fire';
-import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {AngularFireModule} from '@angular/fire/compat';
+import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
 import {firebaseConfig} from 'src/environments/environment';
 
 describe('DashboardComponent', () => {

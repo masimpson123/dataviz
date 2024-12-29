@@ -1,6 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
-import * as firebase from 'firebase/app';
-import 'firebase/auth';
+import {User, updateProfile} from 'firebase/auth';
 import { FirebaseService } from '../services/firebase.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -15,7 +14,7 @@ export class UserManagementComponent implements OnInit, OnDestroy {
   password = '';
   uploadedFile = null;
   uploading = false;
-  user: firebase.User|null = null;
+  user: User|null = null;
 
   destroy$ = new Subject();
 
@@ -60,7 +59,7 @@ export class UserManagementComponent implements OnInit, OnDestroy {
           (photoURLRequest) => photoURLRequest.subscribe(
           photoURL => {
             this.uploading = false;
-            user!.updateProfile({
+            updateProfile(this.user!, {
               photoURL
             });
           }

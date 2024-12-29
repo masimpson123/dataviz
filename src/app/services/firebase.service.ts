@@ -8,15 +8,14 @@ import {addPersonProcessing} from '../store/michael-io-app.actions';
 import {Store} from '@ngrx/store';
 import {FirebasePerson} from '../models/models';
 import {AngularFireAuth} from '@angular/fire/compat/auth';
-import * as firebase from 'firebase/app';
-import 'firebase/auth';
+import {User} from 'firebase/auth';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FirebaseService {
   people = this.firestore.collection('people').valueChanges({idField: 'id'}) as Observable<FirebasePerson[]>;
-  user: ReplaySubject<firebase.User|null> = new ReplaySubject(1);
+  user: ReplaySubject<User> = new ReplaySubject(1);
 
   constructor(
     private firestore: AngularFirestore,
@@ -25,7 +24,8 @@ export class FirebaseService {
     private store: Store<{ people: Map<string, Person> }>,
   ) {
     this.fireAuth.onAuthStateChanged((user) => {
-      this.user.next(user);
+      if (!user) return;
+      this.user.next(user as User);
     });
   }
 
@@ -82,7 +82,7 @@ export class FirebaseService {
 
   signOut() {
     this.fireAuth.signOut().then(() => {
-      this.user.next(null);
+      this.user.next(undefined);
       console.log("Sign out!");
     }).catch((error) => {
       alert(error);
