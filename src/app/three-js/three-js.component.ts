@@ -107,7 +107,7 @@ export class ThreeJsComponent implements AfterViewInit {
     this.scene = new THREE.Scene();
     this.scene.background = new THREE.Color(0x708090);
     this.scene.add(this.cube);
-    this.scene.add(this.lines);
+    // this.scene.add(this.lines);
     this.light.position.set(2,2,2);
     this.scene.add(this.light);
     this.scene.add(this.fillLight);
